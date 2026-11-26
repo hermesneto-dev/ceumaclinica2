@@ -84,4 +84,10 @@ describe("páginas do MVP", () => {
     expect(render("/ajuda")).toContain("Dúvidas frequentes");
     expect(render("/sobre-proposta")).toContain("Apresentação acadêmica");
   });
+  it("oferece controles de acessibilidade com estados semânticos", () => {
+    const html = render("/");
+    expect(html).toContain('aria-haspopup="dialog"');
+    expect(html).toContain('aria-expanded="false"');
+    expect(html).toContain('aria-controls="accessibility-panel"');
+  });
 });

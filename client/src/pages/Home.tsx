@@ -133,7 +133,7 @@ function Header({
   );
 }
 
-function Footer({ go }: { go: (path: string) => void }) {
+function Footer({ go, onShowAccessibility }: { go: (path: string) => void; onShowAccessibility?: () => void }) {
   return (
     <footer className="site-footer">
       <div className="footer-main container">
@@ -151,6 +151,9 @@ function Footer({ go }: { go: (path: string) => void }) {
           </button>
           <button onClick={() => go("/especialidades")}>Especialidades</button>
           <button onClick={() => go("/ajuda")}>Precisa de ajuda?</button>
+          {onShowAccessibility && (
+            <button onClick={onShowAccessibility}>Mostrar acessibilidade</button>
+          )}
         </div>
         <div className="footer-contact">
           <strong>Fale com a clínica</strong>
@@ -1085,11 +1088,15 @@ function AccessibilityControls({
   setHighContrast,
   largeText,
   setLargeText,
+  hidden,
+  setHidden,
 }: {
   highContrast: boolean;
   setHighContrast: (value: boolean) => void;
   largeText: boolean;
   setLargeText: (value: boolean) => void;
+  hidden: boolean;
+  setHidden: (value: boolean) => void;
 }) {
   const [open, setOpen] = useState(false);
   useEffect(() => {
@@ -1100,6 +1107,7 @@ function AccessibilityControls({
     document.addEventListener("keydown", closeOnEscape);
     return () => document.removeEventListener("keydown", closeOnEscape);
   }, [open]);
+  if (hidden) return null;
   return (
     <div className="accessibility-widget">
       <button
@@ -1137,6 +1145,10 @@ function AccessibilityControls({
                 <span><strong>Texto maior</strong><small>Aumenta o tamanho do texto.</small></span>
                 <span className="accessibility-check" aria-hidden="true">{largeText ? "Ativo" : "Ativar"}</span>
               </button>
+              <button className="accessibility-hide" onClick={() => { setOpen(false); setHidden(true); }}>
+                <X size={17} />
+                <span><strong>Ocultar botão</strong><small>Reative pelo rodapé quando quiser.</small></span>
+              </button>
             </div>
           </div>
         </div>
@@ -1158,6 +1170,7 @@ export default function Home() {
   });
   const [highContrast, setHighContrast] = useState(() => typeof window !== "undefined" && window.localStorage.getItem("ceuma-high-contrast") === "true");
   const [largeText, setLargeText] = useState(() => typeof window !== "undefined" && window.localStorage.getItem("ceuma-large-text") === "true");
+  const [accessibilityHidden, setAccessibilityHidden] = useState(() => typeof window !== "undefined" && window.localStorage.getItem("ceuma-accessibility-hidden") === "true");
   const [messageBooking, setMessageBooking] = useState<Booking | null>(null);
   const go = (path: string) => {
     if (
@@ -1216,6 +1229,9 @@ export default function Home() {
     window.localStorage.setItem("ceuma-high-contrast", String(highContrast));
     window.localStorage.setItem("ceuma-large-text", String(largeText));
   }, [highContrast, largeText]);
+  useEffect(() => {
+    window.localStorage.setItem("ceuma-accessibility-hidden", String(accessibilityHidden));
+  }, [accessibilityHidden]);
   useEffect(() => {
     const title =
       navItems.find(([, path]) => path === cleanPath)?.[0] ??
@@ -1306,9 +1322,9 @@ export default function Home() {
           Sobre o MVP <ArrowRight size={13} />
         </button>
       </div>
-      <AccessibilityControls highContrast={highContrast} setHighContrast={setHighContrast} largeText={largeText} setLargeText={setLargeText} />
+      <AccessibilityControls highContrast={highContrast} setHighContrast={setHighContrast} largeText={largeText} setLargeText={setLargeText} hidden={accessibilityHidden} setHidden={setAccessibilityHidden} />
       {content}
-      <Footer go={go} />
+      <Footer go={go} onShowAccessibility={accessibilityHidden ? () => setAccessibilityHidden(false) : undefined} />
       <button
         className="floating-help"
         onClick={() => go("/ajuda")}
