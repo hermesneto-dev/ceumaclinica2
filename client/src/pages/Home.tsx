@@ -2,6 +2,7 @@ import {
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
+  Accessibility,
   CalendarDays,
   Check,
   CheckCircle2,
@@ -1090,11 +1091,51 @@ function AccessibilityControls({
   largeText: boolean;
   setLargeText: (value: boolean) => void;
 }) {
-  return <div className="accessibility-controls" aria-label="Controles de acessibilidade">
-    <span><Contrast size={14} /> Acessibilidade</span>
-    <button aria-pressed={highContrast} onClick={() => setHighContrast(!highContrast)}><Contrast size={14} /> Alto contraste</button>
-    <button aria-pressed={largeText} onClick={() => setLargeText(!largeText)}><Type size={14} /> Texto maior</button>
-  </div>;
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="accessibility-bar">
+      <div className="container accessibility-inner">
+        <button
+          className={`accessibility-trigger ${open ? "is-open" : ""}`}
+          aria-expanded={open}
+          aria-controls="accessibility-panel"
+          aria-haspopup="dialog"
+          onClick={() => setOpen((value) => !value)}
+        >
+          <Accessibility size={17} aria-hidden="true" />
+          <span>Acessibilidade</span>
+          <ChevronDown size={15} aria-hidden="true" />
+        </button>
+        <span className="accessibility-summary">
+          {highContrast || largeText ? "Recursos ativos nesta visita" : "Opções de leitura e contraste"}
+        </span>
+        {open && (
+          <div id="accessibility-panel" className="accessibility-panel" role="dialog" aria-label="Opções de acessibilidade">
+            <div className="accessibility-panel-heading">
+              <Accessibility size={19} />
+              <div>
+                <strong>Opções de acessibilidade</strong>
+                <span>Ajustes aplicados somente neste navegador.</span>
+              </div>
+            </div>
+            <div className="accessibility-options">
+              <button aria-pressed={highContrast} onClick={() => setHighContrast(!highContrast)}>
+                <Contrast size={17} />
+                <span><strong>Alto contraste</strong><small>Reforça cores e bordas.</small></span>
+                <span className="accessibility-check" aria-hidden="true">{highContrast ? "Ativo" : ""}</span>
+              </button>
+              <button aria-pressed={largeText} onClick={() => setLargeText(!largeText)}>
+                <Type size={17} />
+                <span><strong>Texto maior</strong><small>Aumenta a leitura dos conteúdos.</small></span>
+                <span className="accessibility-check" aria-hidden="true">{largeText ? "Ativo" : ""}</span>
+              </button>
+            </div>
+            <p className="accessibility-panel-note">Você pode fechar este painel sem perder suas escolhas.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default function Home() {
