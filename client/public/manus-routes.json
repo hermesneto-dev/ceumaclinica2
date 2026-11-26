@@ -1,0 +1,56 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "title": "Início — Clínica-Escola Integrada Ana Lúcia Chaves Fecury"
+    },
+    {
+      "path": "/especialidades",
+      "title": "Especialidades"
+    },
+    {
+      "path": "/especialidades/:specialtyId",
+      "title": "Detalhe da especialidade"
+    },
+    {
+      "path": "/agendamento",
+      "title": "Agendamento demonstrativo"
+    },
+    {
+      "path": "/cadastro",
+      "title": "Cadastro fictício do paciente"
+    },
+    {
+      "path": "/confirmacao",
+      "title": "Revisão dos dados"
+    },
+    {
+      "path": "/sucesso",
+      "title": "Confirmação demonstrativa"
+    },
+    {
+      "path": "/agendamentos",
+      "title": "Meus agendamentos demonstrativos"
+    },
+    {
+      "path": "/informacoes",
+      "title": "Informações ilustrativas da clínica"
+    },
+    {
+      "path": "/servicos",
+      "title": "Exames e serviços"
+    },
+    {
+      "path": "/ajuda",
+      "title": "Ajuda e acessibilidade"
+    },
+    {
+      "path": "/whatsapp",
+      "title": "WhatsApp — simulação"
+    },
+    {
+      "path": "/privacidade",
+      "title": "Privacidade na demonstração"
+    }
+  ]
+}
