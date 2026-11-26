@@ -51,13 +51,13 @@ type DraftProps = {
   go: Go;
 };
 
-export function MvpNotice({ children }: { children?: ReactNode }) {
+export function PrivacyNotice({ children }: { children?: ReactNode }) {
   return (
-    <div className="privacy-callout mvp-callout" role="note">
+    <div className="privacy-callout" role="note">
       <Info size={18} />
       <p>
         {children ??
-          "Este MVP organiza o atendimento sem reservar horários ou enviar mensagens à clínica."}
+          "Esta solução organiza o atendimento sem reservar horários ou enviar mensagens à clínica."}
       </p>
     </div>
   );
@@ -93,7 +93,7 @@ export function BookingPage({ booking, setBooking, go }: DraftProps) {
       <Progress current={1} />
       <section className="container booking-layout">
         <div className="booking-main">
-          <MvpNotice />
+          <PrivacyNotice />
           <div className="form-section">
             <div className="section-title-row">
               <div>
@@ -183,7 +183,7 @@ export function BookingPage({ booking, setBooking, go }: DraftProps) {
               </div>
             </div>
             <p className="schedule-explanation">
-              Agenda do MVP: {specialty.days.toLowerCase()}.
+              Agenda informativa: {specialty.days.toLowerCase()}.
             </p>
             <div
               className="date-picker"
@@ -350,7 +350,7 @@ export function PatientFormPage({ booking, setBooking, go }: DraftProps) {
         <form
           className="patient-form"
           onSubmit={submit}
-          aria-describedby="mvp-form-note"
+          aria-describedby="privacy-form-note"
         >
           <div className="section-title-row">
             <div>
@@ -359,15 +359,15 @@ export function PatientFormPage({ booking, setBooking, go }: DraftProps) {
             </div>
             <span className="required-note">* obrigatório</span>
           </div>
-          <div id="mvp-form-note">
-            <MvpNotice>
+          <div id="privacy-form-note">
+            <PrivacyNotice>
               Não insira dados pessoais reais. Os campos já trazem um perfil de
               atendimento e nada será enviado ou gravado em um sistema da clínica.
-            </MvpNotice>
+            </PrivacyNotice>
           </div>
           <button
             type="button"
-            className="edit-link mvp-fill"
+            className="edit-link local-fill"
             onClick={() => {
               setPatient({ ...defaultPatient });
               setError("");
@@ -561,9 +561,9 @@ export function ReviewPage({
               value={booking.patient.purpose || "Não informado"}
             />
           </div>
-          <MvpNotice>
+          <PrivacyNotice>
             Confirmar salva este atendimento somente neste navegador. Nenhum dado é enviado à clínica ou ao WhatsApp.
-          </MvpNotice>
+          </PrivacyNotice>
           {!valid && (
             <p className="form-error" role="alert">
               Revise o horário e o cadastro antes de confirmar.
@@ -854,7 +854,7 @@ export function AppointmentsPage({
           <span className="eyebrow">Experimente a proposta</span>
           <h3>Um cuidado mais simples.</h3>
           <p>
-            Esta lista é temporária e do MVP. Para um atendimento real,
+            Esta lista é temporária e informativa. Para um atendimento real,
             confirme os canais oficiais da clínica.
           </p>
           <Button variant="soft" onClick={newBooking}>
@@ -994,7 +994,7 @@ export function PrivacyPage({
       <PageIntro
         eyebrow="Privacidade e dados"
         title="Use somente os dados necessários"
-        description="Este MVP não substitui os canais oficiais de atendimento da clínica."
+        description="Esta página não substitui os canais oficiais de atendimento da clínica."
         go={go}
       />
       <section className="container privacy-content">
@@ -1004,9 +1004,9 @@ export function PrivacyPage({
             As informações digitadas e os agendamentos registrados ficam somente
             na memória da página enquanto ela está aberta. Não são enviados à
             clínica, a um banco de dados ou ao WhatsApp. Recarregar a página ou
-            reiniciar o MVP remove esses atendimentos.
+            reiniciar a página remove esses atendimentos.
           </p>
-          <h2>Como usar este MVP?</h2>
+          <h2>Como usar esta página?</h2>
           <p>
             Use os dados já preenchidos ou informe dados de atendimento. Não
             insira CPF, telefone, endereço, e-mail ou outras informações reais.

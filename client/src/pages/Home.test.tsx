@@ -33,12 +33,12 @@ function render(path: string) {
   );
 }
 
-describe("páginas do MVP", () => {
+describe("páginas principais", () => {
   for (const route of routes) {
     it(`renderiza ${route} com navegação e aviso institucional`, () => {
       const html = render(route);
       expect(html).toContain("Clínica-Escola Integrada");
-      expect(html).toContain("MVP acadêmico");
+      expect(html).toContain("Informações para orientação e atendimento");
       expect(html).toContain("Informações para orientação e atendimento");
       expect(html).toContain("<main");
     });

@@ -170,8 +170,7 @@ function Footer({ go, onShowAccessibility }: { go: (path: string) => void; onSho
       </div>
       <div className="footer-bottom">
         <span>
-          © 2026 Clínica-Escola Integrada Ana Lúcia Chaves Fecury · MVP
-          acadêmico
+          © 2026 Clínica-Escola Integrada Ana Lúcia Chaves Fecury · Informações para orientação e atendimento
         </span>
         <button onClick={() => go("/privacidade")}>
           Privacidade e uso de dados
@@ -328,7 +327,7 @@ function HomePage({ go }: { go: (path: string) => void }) {
         </section>
         <section className="container how-it-works" aria-labelledby="how-title">
           <div>
-            <span className="eyebrow">Jornada do MVP</span>
+            <span className="eyebrow">Como funciona</span>
             <h2 id="how-title">Como funciona a proposta</h2>
             <p>Uma experiência guiada para reduzir dúvidas antes do atendimento.</p>
           </div>
@@ -479,7 +478,7 @@ function SpecialtyCard({
       <span className="eyebrow">{specialty.eyebrow}</span>
       <h3>{specialty.name}</h3>
       <p>{specialty.description}</p>
-      <span className="data-badge">Agenda do MVP</span>
+      <span className="data-badge">Agenda informativa</span>
       <small className="specialty-days">{specialty.days} · horários de atendimento</small>
       <button onClick={() => go(`/especialidades/${specialty.id}`)}>
         Ver horários <ArrowRight size={15} />
@@ -587,7 +586,7 @@ function SpecialtyDetailPage({
               <CalendarDays size={15} /> {specialty.days}
             </span>
             <span>
-              <Clock3 size={15} /> Agenda do MVP
+              <Clock3 size={15} /> Agenda informativa
             </span>
           </div>
         </div>
@@ -682,7 +681,7 @@ function SpecialtyDetailPage({
             Atendimento acolhedor e centrado nas necessidades de cada paciente.
           </p>
           <span className="pro-note">
-            <CheckCircle2 size={15} /> Agenda do MVP
+            <CheckCircle2 size={15} /> Agenda informativa
           </span>
         </div>
       </section>
@@ -818,7 +817,7 @@ function InfoPage({ go }: { go: (path: string) => void }) {
             <p>
               Confirme os contatos, o endereço e a disponibilidade nos canais
               oficiais. Para exames ou procedimentos, consulte a equipe sobre os
-              documentos e as orientações necessários; este MVP não
+              documentos e as orientações necessários; esta página não
               fornece preparo médico.
             </p>
             <Button variant="ghost" onClick={() => go("/servicos")}>
@@ -902,7 +901,7 @@ function ServicesPage({ go }: { go: (path: string) => void }) {
           <h3>As orientações podem variar.</h3>
           <p>
             Antes de qualquer exame ou procedimento, confirme as instruções com
-            a equipe da clínica. Esta página é uma visão do MVP e não
+            a equipe da clínica. Esta página reúne informações gerais e não
             substitui uma orientação profissional.
           </p>
           <Button variant="soft" onClick={() => go("/ajuda")}>
@@ -915,8 +914,8 @@ function ServicesPage({ go }: { go: (path: string) => void }) {
         <div>
           <strong>Sem preços ou informações médicas inventadas</strong>
           <p>
-            O MVP apresenta apenas a ideia de organização dos serviços. Os
-            detalhes serão definidos pela clínica.
+            Esta página apresenta uma organização inicial dos serviços. Os
+            detalhes devem ser confirmados com a clínica.
           </p>
         </div>
       </section>
@@ -982,7 +981,7 @@ function HelpPage({ go }: { go: (path: string) => void }) {
           <p>
             Use zoom, leitor de tela ou peça ajuda a alguém de confiança. A
             equipe presencial e telefônica continua existindo. Os dados deste
-            Os dados informados no MVP, em uma solução real, seriam utilizados
+            Os dados informados nesta página, em uma solução real, seriam utilizados
             apenas para atendimento e agendamento.
           </p>
         </div>
@@ -1010,7 +1009,7 @@ function HelpPage({ go }: { go: (path: string) => void }) {
           {[
             ["Como faço um agendamento?", "Escolha uma especialidade, uma data e um horário. Depois, preencha seus dados e revise o atendimento."],
             ["O atendimento digital é obrigatório?", "Não. A proposta mantém telefone e atendimento presencial como alternativas para quem preferir."],
-            ["Meus dados são enviados à clínica?", "Não. Este MVP não envia dados para a clínica e guarda atendimentos somente neste navegador."],
+            ["Meus dados são enviados à clínica?", "Não. Este site não envia dados para a clínica e guarda atendimentos somente neste navegador."],
             ["Posso cancelar ou alterar um atendimento?", "Sim. Na área Meus agendamentos, use os controles locais de alterar ou cancelar a atendimento."],
           ].map(([question, answer]) => (
             <details key={question}>
@@ -1036,7 +1035,7 @@ function ProposalPage({ go }: { go: (path: string) => void }) {
       <PageIntro
         eyebrow="Apresentação acadêmica"
         title="Uma proposta para aproximar cuidado e informação"
-        description="Esta área explica o raciocínio do MVP, seus limites e possibilidades futuras. Não é uma página de atendimento real."
+        description="Esta área explica o raciocínio da solução, seus limites e possibilidades futuras. Não é uma página de atendimento real."
         action="Começar agendamento"
         go={go}
       />
@@ -1045,7 +1044,7 @@ function ProposalPage({ go }: { go: (path: string) => void }) {
           <GraduationCap size={24} />
           <span className="eyebrow">Objetivo da solução</span>
           <h2>Deixar a jornada mais compreensível antes da chegada à clínica.</h2>
-          <p>O MVP organiza informações, apresenta alternativas digitais e preserva o telefone e o atendimento presencial.</p>
+          <p>A solução organiza informações, apresenta alternativas digitais e preserva o telefone e o atendimento presencial.</p>
         </article>
         <article className="proposal-card">
           <span className="eyebrow">5 porquês · síntese</span>
@@ -1153,11 +1152,11 @@ export default function Home() {
   const [booking, setBooking] = useState<Booking>(createDraft);
   const [appointments, setAppointments] = useState<Appointment[]>(() => {
     if (typeof window === "undefined") return [];
-    try { return JSON.parse(window.localStorage.getItem("ceuma-mvp-appointments") ?? "[]") as Appointment[]; } catch { return []; }
+    try { return JSON.parse(window.localStorage.getItem("ceuma-appointments") ?? "[]") as Appointment[]; } catch { return []; }
   });
   const [confirmed, setConfirmed] = useState<Appointment | null>(() => {
     if (typeof window === "undefined") return null;
-    try { return JSON.parse(window.localStorage.getItem("ceuma-mvp-confirmed") ?? "null") as Appointment | null; } catch { return null; }
+    try { return JSON.parse(window.localStorage.getItem("ceuma-confirmed") ?? "null") as Appointment | null; } catch { return null; }
   });
   const [highContrast, setHighContrast] = useState(() => typeof window !== "undefined" && window.localStorage.getItem("ceuma-high-contrast") === "true");
   const [largeText, setLargeText] = useState(() => typeof window !== "undefined" && window.localStorage.getItem("ceuma-large-text") === "true");
@@ -1210,11 +1209,11 @@ export default function Home() {
     go("/");
   };
   useEffect(() => {
-    window.localStorage.setItem("ceuma-mvp-appointments", JSON.stringify(appointments));
+    window.localStorage.setItem("ceuma-appointments", JSON.stringify(appointments));
   }, [appointments]);
   useEffect(() => {
-    if (confirmed) window.localStorage.setItem("ceuma-mvp-confirmed", JSON.stringify(confirmed));
-    else window.localStorage.removeItem("ceuma-mvp-confirmed");
+    if (confirmed) window.localStorage.setItem("ceuma-confirmed", JSON.stringify(confirmed));
+    else window.localStorage.removeItem("ceuma-confirmed");
   }, [confirmed]);
   useEffect(() => {
     window.localStorage.setItem("ceuma-high-contrast", String(highContrast));
@@ -1227,7 +1226,7 @@ export default function Home() {
     const title =
       navItems.find(([, path]) => path === cleanPath)?.[0] ??
       specialty?.name ??
-      "MVP";
+      "Início";
     document.title = `${title} · Clínica-Escola Integrada Ana Lúcia Chaves Fecury`;
     window.scrollTo({ top: 0, behavior: "instant" });
     const main = document.querySelector("main");
@@ -1305,13 +1304,8 @@ export default function Home() {
         Pular para o conteúdo
       </a>
       <Header go={go} location={cleanPath} />
-      <div className="mvp-banner">
-        <span>
-          MVP acadêmico · Informações para orientação e atendimento
-        </span>
-        <button onClick={() => go("/privacidade") }>
-          Sobre o MVP <ArrowRight size={13} />
-        </button>
+      <div className="context-banner">
+        <span>Informações para orientação e atendimento</span>
       </div>
       <AccessibilityControls highContrast={highContrast} setHighContrast={setHighContrast} largeText={largeText} setLargeText={setLargeText} hidden={accessibilityHidden} setHidden={setAccessibilityHidden} />
       {content}

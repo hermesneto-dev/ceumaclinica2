@@ -6,7 +6,7 @@ import "./journey.css";
 const root = document.getElementById("root");
 
 if (!root) {
-  throw new Error("Elemento raiz do MVP não encontrado.");
+  throw new Error("Elemento raiz da aplicação não encontrado.");
 }
 
 createRoot(root).render(<App />);

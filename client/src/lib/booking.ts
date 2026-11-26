@@ -132,7 +132,7 @@ export function availableDates(
     today.getDate(),
     12,
   );
-  // A agenda do MVP: só oferece dias futuros da semana da especialidade.
+  // A agenda informativa oferece dias futuros da semana da especialidade.
   for (let offset = 1; offset <= 28 && result.length < 4; offset++) {
     cursor.setDate(cursor.getDate() + 1);
     if (days.includes(cursor.getDay())) result.push(localDate(cursor));
@@ -235,7 +235,7 @@ export function createDraft(): Booking {
 
 export function validatePatient(patient: Patient): string | null {
   if (patient.name.trim().split(/\s+/).length < 2)
-    return "Informe o nome completo para a MVP.";
+    return "Informe o nome completo para o atendimento.";
   const phone = patient.phone.replace(/\D/g, "");
   if (phone.length < 10 || phone.length > 11)
     return "Informe um telefone válido com DDD e 10 ou 11 dígitos.";
