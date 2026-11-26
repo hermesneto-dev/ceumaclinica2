@@ -35,11 +35,11 @@ function render(path: string) {
 
 describe("páginas principais", () => {
   for (const route of routes) {
-    it(`renderiza ${route} com navegação e aviso institucional`, () => {
+    it(`renderiza ${route} com navegação e identificação institucional`, () => {
       const html = render(route);
       expect(html).toContain("Clínica-Escola Integrada");
-      expect(html).toContain("Informações para orientação e atendimento");
-      expect(html).toContain("Informações para orientação e atendimento");
+      expect(html).toContain("Atendimento, informações e canais de contato");
+      expect(html).toContain("Atendimento, informações e canais de contato");
       expect(html).toContain("<main");
     });
   }
@@ -64,9 +64,9 @@ describe("páginas principais", () => {
     expect(html).toContain('aria-pressed="true"');
     expect(html).toContain("Próximas datas");
   });
-  it("mantém o WhatsApp como representação, sem promessa de envio", () => {
+  it("apresenta os detalhes da confirmação do atendimento", () => {
     const html = render("/whatsapp");
-    expect(html).toContain("A integração de mensagens ainda será definida");
+    expect(html).toContain("Consulte uma visualização da confirmação");
     expect(html).not.toContain("Você receberá");
   });
   it("mostra horários disponíveis no detalhe da especialidade", () => {
@@ -80,9 +80,9 @@ describe("páginas principais", () => {
     expect(html).toContain("Tipo de atendimento (opcional)");
     expect(html).toContain("Não informe sintomas, diagnósticos");
   });
-  it("apresenta FAQ e conteúdo acadêmico separado", () => {
+  it("apresenta FAQ e informações sobre o atendimento", () => {
     expect(render("/ajuda")).toContain("Dúvidas frequentes");
-    expect(render("/sobre-proposta")).toContain("Apresentação acadêmica");
+    expect(render("/sobre-proposta")).toContain("Sobre o atendimento");
   });
   it("oferece controles de acessibilidade com estados semânticos", () => {
     const html = render("/");

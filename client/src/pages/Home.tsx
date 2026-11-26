@@ -70,7 +70,7 @@ const navItems = [
   ["Meus agendamentos", "/agendamentos"],
   ["Informações", "/informacoes"],
   ["Ajuda", "/ajuda"],
-  ["Sobre a proposta", "/sobre-proposta"],
+  ["Sobre o atendimento", "/sobre-proposta"],
 ] as const;
 
 function Header({
@@ -140,8 +140,7 @@ function Footer({ go, onShowAccessibility }: { go: (path: string) => void; onSho
         <div>
           <Brand />
           <p className="footer-note">
-            Uma proposta digital para deixar o cuidado mais acessível, sem
-            substituir os canais tradicionais.
+            Atendimento digital para facilitar o cuidado, com telefone e acolhimento presencial quando você precisar.
           </p>
         </div>
         <div className="footer-links">
@@ -170,7 +169,7 @@ function Footer({ go, onShowAccessibility }: { go: (path: string) => void; onSho
       </div>
       <div className="footer-bottom">
         <span>
-          © 2026 Clínica-Escola Integrada Ana Lúcia Chaves Fecury · Informações para orientação e atendimento
+          © 2026 Clínica-Escola Integrada Ana Lúcia Chaves Fecury · Atendimento, informações e canais de contato
         </span>
         <button onClick={() => go("/privacidade")}>
           Privacidade e uso de dados
@@ -328,8 +327,8 @@ function HomePage({ go }: { go: (path: string) => void }) {
         <section className="container how-it-works" aria-labelledby="how-title">
           <div>
             <span className="eyebrow">Como funciona</span>
-            <h2 id="how-title">Como funciona a proposta</h2>
-            <p>Uma experiência guiada para reduzir dúvidas antes do atendimento.</p>
+            <h2 id="how-title">Como agendar seu atendimento</h2>
+            <p>Escolha sua especialidade, horário e forma de atendimento em poucos passos.</p>
           </div>
           <div className="how-steps">
             {[
@@ -410,7 +409,7 @@ function HomePage({ go }: { go: (path: string) => void }) {
             <div className="trust-title">
               <ShieldCheck size={22} />
               <div>
-                <strong>Uma proposta pensada para incluir</strong>
+                <strong>Um atendimento pensado para incluir</strong>
                 <span>
                   Digital para quem quer praticidade. Presencial e telefone para
                   quem preferir.
@@ -478,7 +477,7 @@ function SpecialtyCard({
       <span className="eyebrow">{specialty.eyebrow}</span>
       <h3>{specialty.name}</h3>
       <p>{specialty.description}</p>
-      <span className="data-badge">Agenda informativa</span>
+      <span className="data-badge">Horários disponíveis</span>
       <small className="specialty-days">{specialty.days} · horários de atendimento</small>
       <button onClick={() => go(`/especialidades/${specialty.id}`)}>
         Ver horários <ArrowRight size={15} />
@@ -586,7 +585,7 @@ function SpecialtyDetailPage({
               <CalendarDays size={15} /> {specialty.days}
             </span>
             <span>
-              <Clock3 size={15} /> Agenda informativa
+              <Clock3 size={15} /> Horários disponíveis
             </span>
           </div>
         </div>
@@ -622,8 +621,7 @@ function SpecialtyDetailPage({
               ))}
           </div>
           <p className="schedule-explanation">
-            Horários de atendimento, sem disponibilidade real. Confirme a oferta nos
-            canais oficiais.
+            Escolha o horário mais conveniente e confirme seu atendimento.
           </p>
           <Button
             onClick={() => startBooking(specialty.id)}
@@ -681,7 +679,7 @@ function SpecialtyDetailPage({
             Atendimento acolhedor e centrado nas necessidades de cada paciente.
           </p>
           <span className="pro-note">
-            <CheckCircle2 size={15} /> Agenda informativa
+            <CheckCircle2 size={15} /> Horários disponíveis
           </span>
         </div>
       </section>
@@ -695,7 +693,7 @@ function InfoPage({ go }: { go: (path: string) => void }) {
       <PageIntro
         eyebrow="Conheça a clínica"
         title="Informação para você se localizar"
-        description="Localização, horários e contatos informativos para avaliar a proposta. Confirme os canais oficiais antes de buscar atendimento."
+        description="Consulte endereço, horários de funcionamento e canais oficiais de atendimento."
         action="Agendar atendimento"
         go={go}
       />
@@ -724,7 +722,7 @@ function InfoPage({ go }: { go: (path: string) => void }) {
               <span>Av. Jerônimo de Albuquerque, 1200 · Campus CEUMA</span>
               <span>São Luís — MA, 65075-120</span>
             </div>
-            <span className="map-tag">Mapa informativo</span>
+            <span className="map-tag">Localização da clínica</span>
           </div>
         </div>
         <div className="info-side">
@@ -767,7 +765,7 @@ function InfoPage({ go }: { go: (path: string) => void }) {
         <SectionHeading
           eyebrow="No seu tempo"
           title="Escolha o melhor canal para você"
-          description="O site é uma opção. O telefone e o atendimento presencial continuam disponíveis."
+          description="Agende online ou fale diretamente com a equipe pelo telefone e na recepção."
         />
         <div className="channel-grid">
           <button onClick={() => go("/agendamento")}>
@@ -793,8 +791,8 @@ function InfoPage({ go }: { go: (path: string) => void }) {
       <section className="container info-bottom">
         <SectionHeading
           eyebrow="Cuidado e orientação"
-          title="Conheça o que está na proposta"
-          description="Conheça as especialidades e serviços disponíveis. Confirme a oferta e os horários com a clínica."
+          title="Conheça nossos atendimentos"
+          description="Encontre a especialidade ou o serviço que você precisa e escolha como ser atendido."
         />
         <div
           className="info-specialty-links"
@@ -813,12 +811,9 @@ function InfoPage({ go }: { go: (path: string) => void }) {
         <div className="service-note">
           <Info size={20} />
           <div>
-            <strong>Antes de buscar atendimento real</strong>
+            <strong>Antes do atendimento</strong>
             <p>
-              Confirme os contatos, o endereço e a disponibilidade nos canais
-              oficiais. Para exames ou procedimentos, consulte a equipe sobre os
-              documentos e as orientações necessários; esta página não
-              fornece preparo médico.
+              Para exames ou procedimentos, consulte a equipe sobre documentos, preparo e orientações específicos.
             </p>
             <Button variant="ghost" onClick={() => go("/servicos")}>
               Consultar exames e serviços <ArrowRight size={15} />
@@ -875,7 +870,7 @@ function ServicesPage({ go }: { go: (path: string) => void }) {
                 <CareIcon name={item.icon} size={25} />
               </div>
               <div>
-                <span className="eyebrow">Disponível na proposta</span>
+                <span className="eyebrow">Serviço disponível</span>
                 <h2>{item.title}</h2>
                 <p>{item.description}</p>
                 <button
@@ -912,10 +907,9 @@ function ServicesPage({ go }: { go: (path: string) => void }) {
       <section className="container service-note">
         <ShieldCheck size={18} />
         <div>
-          <strong>Sem preços ou informações médicas inventadas</strong>
+          <strong>Informações importantes</strong>
           <p>
-            Esta página apresenta uma organização inicial dos serviços. Os
-            detalhes devem ser confirmados com a clínica.
+            As orientações podem variar conforme o atendimento. Fale com a equipe para confirmar os detalhes.
           </p>
         </div>
       </section>
@@ -928,7 +922,7 @@ function HelpPage({ go }: { go: (path: string) => void }) {
     {
       icon: CalendarDays,
       title: "Preciso de ajuda para agendar",
-      text: "Em uma solução real, a equipe poderia orientar você em cada etapa.",
+      text: "A equipe orienta você em cada etapa do agendamento.",
       action: "Falar com a equipe",
     },
     {
@@ -940,7 +934,7 @@ function HelpPage({ go }: { go: (path: string) => void }) {
     {
       icon: House,
       title: "Quero atendimento presencial",
-      text: "A proposta mantém a recepção presencial como alternativa. Local informativo: Unidade Renascença.",
+      text: "A recepção presencial está disponível na Unidade Renascença.",
       action: "Ver endereço",
     },
   ];
@@ -980,9 +974,7 @@ function HelpPage({ go }: { go: (path: string) => void }) {
           <h2>O digital deve facilitar, não criar barreiras.</h2>
           <p>
             Use zoom, leitor de tela ou peça ajuda a alguém de confiança. A
-            equipe presencial e telefônica continua existindo. Os dados deste
-            Os dados informados nesta página, em uma solução real, seriam utilizados
-            apenas para atendimento e agendamento.
+            equipe presencial e telefônica continua existindo. Os dados informados são utilizados apenas para organizar seu atendimento e permanecem neste dispositivo.
           </p>
         </div>
         <div className="accessibility-list">
@@ -1008,7 +1000,7 @@ function HelpPage({ go }: { go: (path: string) => void }) {
         <div className="faq-list">
           {[
             ["Como faço um agendamento?", "Escolha uma especialidade, uma data e um horário. Depois, preencha seus dados e revise o atendimento."],
-            ["O atendimento digital é obrigatório?", "Não. A proposta mantém telefone e atendimento presencial como alternativas para quem preferir."],
+            ["O atendimento digital é obrigatório?", "Não. Telefone e atendimento presencial também estão disponíveis para quem preferir."],
             ["Meus dados são enviados à clínica?", "Não. Este site não envia dados para a clínica e guarda atendimentos somente neste navegador."],
             ["Posso cancelar ou alterar um atendimento?", "Sim. Na área Meus agendamentos, use os controles locais de alterar ou cancelar a atendimento."],
           ].map(([question, answer]) => (
@@ -1028,27 +1020,27 @@ function ProposalPage({ go }: { go: (path: string) => void }) {
     ["Pacientes", "Encontrar informações claras e autonomia para escolher o canal."],
     ["Recepção", "Reduzir dúvidas repetitivas e organizar a chegada dos atendimentos."],
     ["Profissionais e supervisores", "Visualizar uma jornada mais previsível para o cuidado."],
-    ["Coordenação", "Acompanhar uma proposta integrada sem perder o acolhimento."],
+    ["Coordenação", "Acompanhar o atendimento integrado sem perder o acolhimento."],
   ];
   return (
     <main className="content-page proposal-page">
       <PageIntro
-        eyebrow="Apresentação acadêmica"
-        title="Uma proposta para aproximar cuidado e informação"
-        description="Esta área explica o raciocínio da solução, seus limites e possibilidades futuras. Não é uma página de atendimento real."
+        eyebrow="Sobre o atendimento"
+        title="Cuidado organizado para você"
+        description="Conheça como a clínica organiza informações, especialidades, serviços e canais de atendimento."
         action="Começar agendamento"
         go={go}
       />
       <section className="container proposal-grid">
         <article className="proposal-card proposal-highlight">
           <GraduationCap size={24} />
-          <span className="eyebrow">Objetivo da solução</span>
-          <h2>Deixar a jornada mais compreensível antes da chegada à clínica.</h2>
-          <p>A solução organiza informações, apresenta alternativas digitais e preserva o telefone e o atendimento presencial.</p>
+          <span className="eyebrow">Nosso atendimento</span>
+          <h2>Oferecer informação clara para você chegar ao atendimento com mais tranquilidade.</h2>
+          <p>Você encontra especialidades, horários, endereço e canais de atendimento em um só lugar.</p>
         </article>
         <article className="proposal-card">
           <span className="eyebrow">5 porquês · síntese</span>
-          <h2>Por que esta proposta existe?</h2>
+          <h2>Por que este atendimento é importante?</h2>
           <ol>
             <li>Porque pacientes têm dúvidas antes de buscar atendimento.</li>
             <li>Porque informações dispersas dificultam a decisão.</li>
@@ -1059,14 +1051,14 @@ function ProposalPage({ go }: { go: (path: string) => void }) {
         </article>
       </section>
       <section className="container proposal-section">
-        <SectionHeading eyebrow="Quem participa" title="Stakeholders considerados" description="Uma visão inicial para orientar futuras validações com a instituição." />
+        <SectionHeading eyebrow="Quem participa" title="Stakeholders considerados" description="Uma experiência organizada para pacientes, recepção, profissionais e coordenação." />
         <div className="stakeholder-grid">
           {stakeholders.map(([name, text]) => <article key={name}><strong>{name}</strong><p>{text}</p></article>)}
         </div>
       </section>
       <section className="container proposal-limitations">
         <Info size={20} />
-        <div><strong>Limites atuais e próximos passos</strong><p>Os dados são informados, ainda não há integração com sistemas da clínica. Uma evolução exigiria validação institucional, requisitos de privacidade e arquitetura segura.</p></div>
+        <div><strong>Informações e privacidade</strong><p>Os registros realizados pelo site ficam neste dispositivo. Para falar diretamente com a clínica, utilize os canais de atendimento.</p></div>
         <Button variant="soft" onClick={() => go("/privacidade")}>Ver privacidade <ArrowRight size={15} /></Button>
       </section>
     </main>
@@ -1305,7 +1297,7 @@ export default function Home() {
       </a>
       <Header go={go} location={cleanPath} />
       <div className="context-banner">
-        <span>Informações para orientação e atendimento</span>
+        <span>Atendimento, informações e canais de contato</span>
       </div>
       <AccessibilityControls highContrast={highContrast} setHighContrast={setHighContrast} largeText={largeText} setLargeText={setLargeText} hidden={accessibilityHidden} setHidden={setAccessibilityHidden} />
       {content}

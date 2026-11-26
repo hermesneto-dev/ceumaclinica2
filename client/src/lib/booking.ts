@@ -132,7 +132,7 @@ export function availableDates(
     today.getDate(),
     12,
   );
-  // A agenda informativa oferece dias futuros da semana da especialidade.
+  // A agenda apresenta os próximos dias disponíveis para cada especialidade.
   for (let offset = 1; offset <= 28 && result.length < 4; offset++) {
     cursor.setDate(cursor.getDate() + 1);
     if (days.includes(cursor.getDay())) result.push(localDate(cursor));

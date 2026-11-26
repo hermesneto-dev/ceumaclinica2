@@ -21,7 +21,7 @@ beforeEach(() => {
 });
 afterEach(() => vi.useRealTimers());
 
-describe("agenda informativa", () => {
+describe("agenda de atendimento", () => {
   const expectedDays: Record<string, number[]> = {
     "clinica-medica": [2, 4],
     cardiologia: [1, 3],

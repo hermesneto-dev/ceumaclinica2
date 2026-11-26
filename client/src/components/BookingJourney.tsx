@@ -57,7 +57,7 @@ export function PrivacyNotice({ children }: { children?: ReactNode }) {
       <Info size={18} />
       <p>
         {children ??
-          "Esta solução organiza o atendimento sem reservar horários ou enviar mensagens à clínica."}
+          "Seu agendamento fica registrado neste dispositivo. Para falar com a equipe, utilize os canais de atendimento."}
       </p>
     </div>
   );
@@ -100,7 +100,7 @@ export function BookingPage({ booking, setBooking, go }: DraftProps) {
                 <span className="eyebrow">01 · Atendimento</span>
                 <h2>O que você precisa?</h2>
               </div>
-              <span className="form-hint">Agenda informada</span>
+              <span className="form-hint">Horários disponíveis</span>
             </div>
             <div
               className="select-grid"
@@ -183,7 +183,7 @@ export function BookingPage({ booking, setBooking, go }: DraftProps) {
               </div>
             </div>
             <p className="schedule-explanation">
-              Agenda informativa: {specialty.days.toLowerCase()}.
+              Atendimento: {specialty.days.toLowerCase()}.
             </p>
             <div
               className="date-picker"
@@ -361,8 +361,7 @@ export function PatientFormPage({ booking, setBooking, go }: DraftProps) {
           </div>
           <div id="privacy-form-note">
             <PrivacyNotice>
-              Não insira dados pessoais reais. Os campos já trazem um perfil de
-              atendimento e nada será enviado ou gravado em um sistema da clínica.
+              Preencha seus dados para organizar o atendimento. As informações ficam armazenadas somente neste dispositivo.
             </PrivacyNotice>
           </div>
           <button
@@ -373,7 +372,7 @@ export function PatientFormPage({ booking, setBooking, go }: DraftProps) {
               setError("");
             }}
           >
-            Repor dados informados de atendimento <ArrowRight size={14} />
+            Preencher dados de atendimento <ArrowRight size={14} />
           </button>
           <div className="field-grid">
             <InputField
@@ -562,7 +561,7 @@ export function ReviewPage({
             />
           </div>
           <PrivacyNotice>
-            Confirmar salva este atendimento somente neste navegador. Nenhum dado é enviado à clínica ou ao WhatsApp.
+            Ao confirmar, o atendimento fica registrado neste dispositivo para consulta, alteração ou cancelamento.
           </PrivacyNotice>
           {!valid && (
             <p className="form-error" role="alert">
@@ -582,10 +581,10 @@ export function ReviewPage({
           <div className="whatsapp-badge">
             <MessageCircle size={19} />
           </div>
-          <span className="eyebrow">Comunicação proposta</span>
+          <span className="eyebrow">Canais de atendimento</span>
           <h3>Informação por perto.</h3>
           <p>
-            O WhatsApp pode ser integrado futuramente com validação, consentimento e segurança adequados.
+            Consulte os canais de atendimento para receber orientações da equipe.
           </p>
           <button onClick={() => go("/whatsapp")}>
             Ver atendimento da mensagem <ArrowRight size={15} />
@@ -621,7 +620,7 @@ export function SuccessPage({
           <em>com sucesso!</em>
         </h1>
         <p className="success-lead">
-          Seu atendimento foi salvo neste navegador. Nenhum horário foi reservado.
+          Seu atendimento foi registrado neste dispositivo.
         </p>
         <div className="success-booking-card">
           <div className="protocol">
@@ -640,14 +639,14 @@ export function SuccessPage({
               </strong>
             </div>
             <div>
-              <small>Local informativo</small>
+              <small>Local do atendimento</small>
               <strong>Unidade Renascença</strong>
             </div>
           </div>
           <div className="success-whatsapp">
             <MessageCircle size={17} />
             <span>
-              Confirmação e lembrete por WhatsApp podem ser integrados futuramente.
+              Consulte os canais oficiais para orientações sobre seu atendimento.
             </span>
           </div>
         </div>
@@ -693,7 +692,7 @@ export function AppointmentsPage({
       <PageIntro
         eyebrow="Área do paciente"
         title="Meus agendamentos"
-        description="Os atendimentos confirmados ficam salvos somente neste navegador."
+        description="Seus atendimentos ficam salvos neste dispositivo para consulta e gerenciamento."
         go={go}
       />
       <section className="container appointments-layout">
@@ -741,7 +740,7 @@ export function AppointmentsPage({
                 </h2>
                 <p>
                   {tab === "upcoming"
-                    ? "Ao confirmar um agendamento, ele aparecerá nesta lista. Nenhum horário é reservado."
+                    ? "Os atendimentos confirmados aparecem nesta lista para consulta e gerenciamento."
                     : "Atendimentos com datas passadas aparecerão aqui."}
                 </p>
                 <Button onClick={newBooking}>
@@ -798,8 +797,7 @@ export function AppointmentsPage({
                           <Clock3 size={15} /> {item.time}
                         </p>
                         <p>
-                          <MapPin size={15} /> Unidade Renascença · local
-                          informativo
+                          <MapPin size={15} /> Unidade Renascença · local do atendimento
                         </p>
                       </div>
                     </div>
@@ -819,8 +817,7 @@ export function AppointmentsPage({
                           <strong>Data:</strong> {formatDate(item.date)}
                         </p>
                         <p>
-                          Registro somente na memória desta página. Sem envio à
-                          clínica.
+                          Registro mantido neste dispositivo. Para informações adicionais, fale com a equipe.
                         </p>
                       </div>
                     )}
@@ -851,11 +848,10 @@ export function AppointmentsPage({
           <div className="next-step-icon">
             <Info size={21} />
           </div>
-          <span className="eyebrow">Experimente a proposta</span>
+          <span className="eyebrow">Área do paciente</span>
           <h3>Um cuidado mais simples.</h3>
           <p>
-            Esta lista é temporária e informativa. Para um atendimento real,
-            confirme os canais oficiais da clínica.
+            Consulte seus atendimentos, altere horários ou fale com a equipe sempre que precisar.
           </p>
           <Button variant="soft" onClick={newBooking}>
             Novo agendamento <ArrowRight size={15} />
@@ -876,9 +872,9 @@ export function WhatsAppPage({ booking, go }: { booking: Booking; go: Go }) {
   return (
     <main className="content-page whatsapp-page">
       <PageIntro
-        eyebrow="Comunicação proposta"
-        title="Assim pode ser o seu WhatsApp"
-        description="Veja como confirmações e lembretes podem ser organizados. A integração de mensagens ainda será definida."
+        eyebrow="Canais de atendimento"
+        title="Confirmação do atendimento"
+        description="Consulte uma visualização da confirmação e os detalhes do seu atendimento."
         go={go}
       />
       <section className="container whatsapp-layout">
@@ -912,7 +908,7 @@ export function WhatsAppPage({ booking, go }: { booking: Booking; go: Go }) {
             <div className="chat-date">MENSAGEM DE ATENDIMENTO</div>
             <div className="message received">
               <p>
-                Olá, {booking.patient.name.split(" ")[0]}! Este seria um atendimento
+                Olá, {booking.patient.name.split(" ")[0]}! Este é o atendimento
                 de confirmação da Clínica-Escola Integrada Ana Lúcia Chaves
                 Fecury.
               </p>
@@ -933,15 +929,15 @@ export function WhatsAppPage({ booking, go }: { booking: Booking; go: Go }) {
             </div>
             <div className="message received reminder">
               <div className="reminder-title">
-                <Clock3 size={15} /> Lembrete proposto
+                <Clock3 size={15} /> Lembrete do atendimento
               </div>
               <p>
-                Lembrete para o atendimento de {formatDate(booking.date)}, às{" "}
+                Lembrete do atendimento de {formatDate(booking.date)}, às{" "}
                 {booking.time}. Caso precise de ajuda, procure os canais
                 oficiais da clínica.
               </p>
               <small>
-                Atendimento de lembrete{" "}
+                Informação do atendimento{" "}
                 <span className="checks" aria-hidden="true">
                   ✓✓
                 </span>
@@ -949,7 +945,7 @@ export function WhatsAppPage({ booking, go }: { booking: Booking; go: Go }) {
             </div>
           </div>
           <div className="wa-input">
-            <span>Representação visual, sem envio</span>
+            <span>Resumo do atendimento</span>
             <Send size={17} />
           </div>
         </div>
@@ -957,20 +953,20 @@ export function WhatsAppPage({ booking, go }: { booking: Booking; go: Go }) {
           <div className="whatsapp-badge">
             <MessageCircle size={21} />
           </div>
-          <span className="eyebrow">Comunicação do atendimento</span>
+          <span className="eyebrow">Detalhes do atendimento</span>
           <h2>Mais clareza, menos preocupação.</h2>
           <p>
-            O WhatsApp pode ser integrado futuramente, com validação da clínica, consentimento e proteção adequada dos dados.
+            Consulte os canais oficiais da clínica para orientações e informações sobre o atendimento.
           </p>
           <div className="concept-list">
             <span>
-              <CheckCircle2 size={16} /> Confirmação proposta
+              <CheckCircle2 size={16} /> Confirmação do atendimento
             </span>
             <span>
-              <CheckCircle2 size={16} /> Lembrete proposto
+              <CheckCircle2 size={16} /> Lembrete do atendimento
             </span>
             <span>
-              <CheckCircle2 size={16} /> Sem mensagens enviadas
+              <CheckCircle2 size={16} /> Canais oficiais disponíveis
             </span>
           </div>
           <Button variant="soft" onClick={() => go("/agendamentos")}>
@@ -1001,10 +997,7 @@ export function PrivacyPage({
         <div className="patient-form">
           <h2>O que acontece com os dados?</h2>
           <p>
-            As informações digitadas e os agendamentos registrados ficam somente
-            na memória da página enquanto ela está aberta. Não são enviados à
-            clínica, a um banco de dados ou ao WhatsApp. Recarregar a página ou
-            reiniciar a página remove esses atendimentos.
+            As informações digitadas e os agendamentos registrados ficam armazenados somente neste dispositivo. Eles não são enviados automaticamente à clínica ou ao WhatsApp.
           </p>
           <h2>Como usar esta página?</h2>
           <p>
@@ -1014,9 +1007,7 @@ export function PrivacyPage({
           </p>
           <h2>Próximos passos</h2>
           <p>
-            A finalidade proposta seria organizar atendimento e agendamento.
-            Qualquer implementação real dependeria de validação institucional,
-            regras de acesso, proteção dos dados e informação clara ao paciente.
+            O site organiza informações e agendamentos neste dispositivo. Para atendimento, orientações ou confirmação de canais, fale diretamente com a clínica.
           </p>
           <div className="form-actions">
             <Button onClick={resetLocalData}>Limpar dados locais</Button>
@@ -1037,8 +1028,7 @@ export function MissingConfirmationPage({ go }: { go: Go }) {
         <CalendarDays size={32} />
         <h1>Ainda não há confirmação nesta visita</h1>
         <p>
-          Conclua a revisão para gerar um atendimento de agendamento. Nenhum horário
-          real será reservado.
+          Conclua a revisão para gerar um atendimento de agendamento. O atendimento será registrado neste dispositivo.
         </p>
         <Button onClick={() => go("/agendamento")}>
           Começar agendamento <ArrowRight size={16} />
