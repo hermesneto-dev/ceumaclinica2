@@ -14,11 +14,11 @@
     },
     {
       "path": "/agendamento",
-      "title": "Agendamento demonstrativo"
+      "title": "Agendamento"
     },
     {
       "path": "/cadastro",
-      "title": "Cadastro fictício do paciente"
+      "title": "Cadastro do paciente"
     },
     {
       "path": "/confirmacao",
@@ -26,15 +26,15 @@
     },
     {
       "path": "/sucesso",
-      "title": "Confirmação demonstrativa"
+      "title": "Confirmação do agendamento"
     },
     {
       "path": "/agendamentos",
-      "title": "Meus agendamentos demonstrativos"
+      "title": "Meus agendamentos"
     },
     {
       "path": "/informacoes",
-      "title": "Informações ilustrativas da clínica"
+      "title": "Informações da clínica"
     },
     {
       "path": "/servicos",
@@ -50,11 +50,11 @@
     },
     {
       "path": "/whatsapp",
-      "title": "WhatsApp — simulação"
+      "title": "WhatsApp"
     },
     {
       "path": "/privacidade",
-      "title": "Privacidade na demonstração"
+      "title": "Privacidade e dados"
     }
   ]
 }

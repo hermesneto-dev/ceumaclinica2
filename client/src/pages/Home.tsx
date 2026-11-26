@@ -167,7 +167,7 @@ function Footer({ go }: { go: (path: string) => void }) {
       </div>
       <div className="footer-bottom">
         <span>
-          © 2026 Clínica-Escola Integrada Ana Lúcia Chaves Fecury · Protótipo
+          © 2026 Clínica-Escola Integrada Ana Lúcia Chaves Fecury · MVP
           acadêmico
         </span>
         <button onClick={() => go("/privacidade")}>
@@ -225,7 +225,7 @@ function HomePage({ go }: { go: (path: string) => void }) {
               <div className="hero-card">
                 <div className="hero-card-top">
                   <span className="status-dot" />{" "}
-                  <span>Exemplo de atendimento</span>
+                  <span>Atendimento disponível</span>
                   <button
                     onClick={() => go("/agendamentos")}
                     aria-label="Ver agendamentos"
@@ -248,7 +248,7 @@ function HomePage({ go }: { go: (path: string) => void }) {
                     <span className="appointment-label">Clínica médica</span>
                     <h3>Consulta de rotina</h3>
                     <p>
-                      <Clock3 size={14} /> Horário demonstrativo · 09:30
+                      <Clock3 size={14} /> Horário disponível · 09:30
                     </p>
                   </div>
                 </div>
@@ -268,7 +268,7 @@ function HomePage({ go }: { go: (path: string) => void }) {
                 </div>
                 <div>
                   <strong>Proposta de lembrete</strong>
-                  <span>Simulação, sem envio real.</span>
+                  <span>Lembrete disponível no MVP.</span>
                 </div>
               </div>
             </div>
@@ -317,7 +317,7 @@ function HomePage({ go }: { go: (path: string) => void }) {
         </section>
         <section
           className="container home-contact-strip"
-          aria-label="Informações e canais demonstrativos"
+          aria-label="Informações e canais disponíveis"
         >
           <span>
             <Clock3 size={16} /> Seg a sex · 07h às 18h
@@ -326,24 +326,24 @@ function HomePage({ go }: { go: (path: string) => void }) {
             <MapPin size={16} /> Campus Renascença · São Luís
           </span>
           <button onClick={() => go("/informacoes")}>
-            <Phone size={16} /> Telefone de exemplo
+            <Phone size={16} /> Telefone de atendimento
           </button>
           <button onClick={() => go("/whatsapp")}>
-            <MessageCircle size={16} /> WhatsApp · simulação
+            <MessageCircle size={16} /> WhatsApp
           </button>
         </section>
         <section className="container how-it-works" aria-labelledby="how-title">
           <div>
-            <span className="eyebrow">Jornada demonstrativa</span>
+            <span className="eyebrow">Jornada do MVP</span>
             <h2 id="how-title">Como funciona a proposta</h2>
             <p>Uma experiência guiada para reduzir dúvidas antes do atendimento.</p>
           </div>
           <div className="how-steps">
             {[
-              ["01", "Escolha uma especialidade", "Veja áreas e horários de exemplo."],
-              ["02", "Selecione data e horário", "Navegue pelo calendário demonstrativo."],
-              ["03", "Preencha dados fictícios", "Use o perfil de exemplo já preparado."],
-              ["04", "Revise e confirme", "O registro fica somente nesta demonstração."],
+              ["01", "Escolha uma especialidade", "Veja áreas e horários de atendimento."],
+              ["02", "Selecione data e horário", "Navegue pelo calendário disponível."],
+              ["03", "Preencha seus dados", "Informe apenas o necessário para continuar."],
+              ["04", "Revise e confirme", "Confira tudo antes de finalizar."],
             ].map(([number, title, text]) => (
               <div className="how-step" key={number}>
                 <span>{number}</span>
@@ -430,7 +430,7 @@ function HomePage({ go }: { go: (path: string) => void }) {
             </div>
             <div className="trust-point">
               <CheckCircle2 size={18} />
-              <span>Somente dados fictícios</span>
+          <span>Privacidade em cada etapa</span>
             </div>
             <div className="trust-point">
               <CheckCircle2 size={18} />
@@ -485,8 +485,8 @@ function SpecialtyCard({
       <span className="eyebrow">{specialty.eyebrow}</span>
       <h3>{specialty.name}</h3>
       <p>{specialty.description}</p>
-      <span className="data-badge">Agenda demonstrativa</span>
-      <small className="specialty-days">{specialty.days} · horários de exemplo</small>
+      <span className="data-badge">Agenda do MVP</span>
+      <small className="specialty-days">{specialty.days} · horários de atendimento</small>
       <button onClick={() => go(`/especialidades/${specialty.id}`)}>
         Ver horários <ArrowRight size={15} />
       </button>
@@ -593,7 +593,7 @@ function SpecialtyDetailPage({
               <CalendarDays size={15} /> {specialty.days}
             </span>
             <span>
-              <Clock3 size={15} /> Agenda demonstrativa
+              <Clock3 size={15} /> Agenda do MVP
             </span>
           </div>
         </div>
@@ -618,7 +618,7 @@ function SpecialtyDetailPage({
           </div>
           <div
             className="detail-time-list"
-            aria-label="Horários demonstrativos disponíveis"
+            aria-label="Horários disponíveis"
           >
             {specialty.times
               .filter((time) => !unavailableTime(specialty.id, time))
@@ -629,7 +629,7 @@ function SpecialtyDetailPage({
               ))}
           </div>
           <p className="schedule-explanation">
-            Horários de exemplo, sem disponibilidade real. Confirme a oferta nos
+            Horários de atendimento, sem disponibilidade real. Confirme a oferta nos
             canais oficiais.
           </p>
           <Button
@@ -688,7 +688,7 @@ function SpecialtyDetailPage({
             Atendimento acolhedor e centrado nas necessidades de cada paciente.
           </p>
           <span className="pro-note">
-            <CheckCircle2 size={15} /> Agenda demonstrativa
+            <CheckCircle2 size={15} /> Agenda do MVP
           </span>
         </div>
       </section>
@@ -702,7 +702,7 @@ function InfoPage({ go }: { go: (path: string) => void }) {
       <PageIntro
         eyebrow="Conheça a clínica"
         title="Informação para você se localizar"
-        description="Localização, horários e contatos ilustrativos para avaliar a proposta. Confirme os canais oficiais antes de buscar atendimento."
+        description="Localização, horários e contatos informativos para avaliar a proposta. Confirme os canais oficiais antes de buscar atendimento."
         action="Agendar atendimento"
         go={go}
       />
@@ -731,7 +731,7 @@ function InfoPage({ go }: { go: (path: string) => void }) {
               <span>Av. Jerônimo de Albuquerque, 1200 · Campus CEUMA</span>
               <span>São Luís — MA, 65075-120</span>
             </div>
-            <span className="map-tag">Mapa ilustrativo</span>
+            <span className="map-tag">Mapa informativo</span>
           </div>
         </div>
         <div className="info-side">
@@ -801,11 +801,11 @@ function InfoPage({ go }: { go: (path: string) => void }) {
         <SectionHeading
           eyebrow="Cuidado e orientação"
           title="Conheça o que está na proposta"
-          description="Estas especialidades e serviços são exemplos para a apresentação. A oferta real precisa ser confirmada com a clínica."
+          description="Conheça as especialidades e serviços disponíveis. Confirme a oferta e os horários com a clínica."
         />
         <div
           className="info-specialty-links"
-          aria-label="Especialidades demonstrativas"
+          aria-label="Especialidades disponíveis"
         >
           {specialties.map((item) => (
             <Button
@@ -824,7 +824,7 @@ function InfoPage({ go }: { go: (path: string) => void }) {
             <p>
               Confirme os contatos, o endereço e a disponibilidade nos canais
               oficiais. Para exames ou procedimentos, consulte a equipe sobre os
-              documentos e as orientações necessários; este protótipo não
+              documentos e as orientações necessários; este MVP não
               fornece preparo médico.
             </p>
             <Button variant="ghost" onClick={() => go("/servicos")}>
@@ -908,7 +908,7 @@ function ServicesPage({ go }: { go: (path: string) => void }) {
           <h3>As orientações podem variar.</h3>
           <p>
             Antes de qualquer exame ou procedimento, confirme as instruções com
-            a equipe da clínica. Esta página é uma visão demonstrativa e não
+            a equipe da clínica. Esta página é uma visão do MVP e não
             substitui uma orientação profissional.
           </p>
           <Button variant="soft" onClick={() => go("/ajuda")}>
@@ -921,7 +921,7 @@ function ServicesPage({ go }: { go: (path: string) => void }) {
         <div>
           <strong>Sem preços ou informações médicas inventadas</strong>
           <p>
-            O protótipo apresenta apenas a ideia de organização dos serviços. Os
+            O MVP apresenta apenas a ideia de organização dos serviços. Os
             detalhes serão definidos pela clínica.
           </p>
         </div>
@@ -941,13 +941,13 @@ function HelpPage({ go }: { go: (path: string) => void }) {
     {
       icon: Phone,
       title: "Prefiro atendimento por telefone",
-      text: "Telefone de exemplo: (98) 3214-0000. Confirme o canal oficial antes de ligar.",
-      action: "Ver telefone demonstrativo",
+      text: "Telefone de atendimento: (98) 3214-0000. Confirme o canal oficial antes de ligar.",
+      action: "Ver telefone disponível",
     },
     {
       icon: House,
       title: "Quero atendimento presencial",
-      text: "A proposta mantém a recepção presencial como alternativa. Local ilustrativo: Unidade Renascença.",
+      text: "A proposta mantém a recepção presencial como alternativa. Local informativo: Unidade Renascença.",
       action: "Ver endereço",
     },
   ];
@@ -988,7 +988,7 @@ function HelpPage({ go }: { go: (path: string) => void }) {
           <p>
             Use zoom, leitor de tela ou peça ajuda a alguém de confiança. A
             equipe presencial e telefônica continua existindo. Os dados deste
-            protótipo são fictícios e, em uma solução real, seriam utilizados
+            Os dados informados no MVP, em uma solução real, seriam utilizados
             apenas para atendimento e agendamento.
           </p>
         </div>
@@ -1010,14 +1010,14 @@ function HelpPage({ go }: { go: (path: string) => void }) {
             <span className="eyebrow">Dúvidas frequentes</span>
             <h2 id="faq-title">Respostas para começar</h2>
           </div>
-          <span className="data-badge">Conteúdo demonstrativo</span>
+          <span className="data-badge">Conteúdo disponível</span>
         </div>
         <div className="faq-list">
           {[
-            ["Como faço um agendamento?", "Escolha uma especialidade, uma data e um horário de exemplo. Depois, preencha o perfil fictício e revise a simulação."],
+            ["Como faço um agendamento?", "Escolha uma especialidade, uma data e um horário. Depois, preencha seus dados e revise o atendimento."],
             ["O atendimento digital é obrigatório?", "Não. A proposta mantém telefone e atendimento presencial como alternativas para quem preferir."],
-            ["Meus dados são enviados à clínica?", "Não. Este protótipo não envia dados e guarda exemplos somente neste navegador."],
-            ["Posso cancelar ou alterar um exemplo?", "Sim. Na área Meus agendamentos, use os controles locais de alterar ou cancelar a simulação."],
+            ["Meus dados são enviados à clínica?", "Não. Este MVP não envia dados para a clínica e guarda atendimentos somente neste navegador."],
+            ["Posso cancelar ou alterar um atendimento?", "Sim. Na área Meus agendamentos, use os controles locais de alterar ou cancelar a atendimento."],
           ].map(([question, answer]) => (
             <details key={question}>
               <summary>{question}<ChevronDown size={17} /></summary>
@@ -1042,8 +1042,8 @@ function ProposalPage({ go }: { go: (path: string) => void }) {
       <PageIntro
         eyebrow="Apresentação acadêmica"
         title="Uma proposta para aproximar cuidado e informação"
-        description="Esta área explica o raciocínio do protótipo, seus limites e possibilidades futuras. Não é uma página de atendimento real."
-        action="Experimentar agendamento"
+        description="Esta área explica o raciocínio do MVP, seus limites e possibilidades futuras. Não é uma página de atendimento real."
+        action="Começar agendamento"
         go={go}
       />
       <section className="container proposal-grid">
@@ -1051,7 +1051,7 @@ function ProposalPage({ go }: { go: (path: string) => void }) {
           <GraduationCap size={24} />
           <span className="eyebrow">Objetivo da solução</span>
           <h2>Deixar a jornada mais compreensível antes da chegada à clínica.</h2>
-          <p>O protótipo organiza informações, apresenta alternativas digitais e preserva o telefone e o atendimento presencial.</p>
+          <p>O MVP organiza informações, apresenta alternativas digitais e preserva o telefone e o atendimento presencial.</p>
         </article>
         <article className="proposal-card">
           <span className="eyebrow">5 porquês · síntese</span>
@@ -1073,7 +1073,7 @@ function ProposalPage({ go }: { go: (path: string) => void }) {
       </section>
       <section className="container proposal-limitations">
         <Info size={20} />
-        <div><strong>Limites atuais e próximos passos</strong><p>Os dados são fictícios, não há backend, autenticação, agenda real ou integração de mensagens. Uma evolução exigiria validação institucional, requisitos de privacidade e arquitetura segura.</p></div>
+        <div><strong>Limites atuais e próximos passos</strong><p>Os dados são informados, ainda não há integração com sistemas da clínica. Uma evolução exigiria validação institucional, requisitos de privacidade e arquitetura segura.</p></div>
         <Button variant="soft" onClick={() => go("/privacidade")}>Ver privacidade <ArrowRight size={15} /></Button>
       </section>
     </main>
@@ -1092,49 +1092,56 @@ function AccessibilityControls({
   setLargeText: (value: boolean) => void;
 }) {
   const [open, setOpen] = useState(false);
+  useEffect(() => {
+    if (!open) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [open]);
   return (
-    <div className="accessibility-bar">
-      <div className="container accessibility-inner">
-        <button
-          className={`accessibility-trigger ${open ? "is-open" : ""}`}
-          aria-expanded={open}
-          aria-controls="accessibility-panel"
-          aria-haspopup="dialog"
-          onClick={() => setOpen((value) => !value)}
-        >
-          <Accessibility size={17} aria-hidden="true" />
-          <span>Acessibilidade</span>
-          <ChevronDown size={15} aria-hidden="true" />
-        </button>
-        <span className="accessibility-summary">
-          {highContrast || largeText ? "Recursos ativos nesta visita" : "Opções de leitura e contraste"}
-        </span>
-        {open && (
-          <div id="accessibility-panel" className="accessibility-panel" role="dialog" aria-label="Opções de acessibilidade">
+    <div className="accessibility-widget">
+      <button
+        className={`accessibility-trigger ${open ? "is-open" : ""}`}
+        aria-label="Abrir opções de acessibilidade"
+        aria-expanded={open}
+        aria-controls="accessibility-panel"
+        aria-haspopup="dialog"
+        onClick={() => setOpen((value) => !value)}
+      >
+        <Accessibility size={21} aria-hidden="true" />
+        <span className="sr-only">Acessibilidade</span>
+      </button>
+      {open && (
+        <div className="accessibility-modal-backdrop" onMouseDown={(event) => {
+          if (event.target === event.currentTarget) setOpen(false);
+        }}>
+          <div id="accessibility-panel" className="accessibility-panel" role="dialog" aria-modal="true" aria-labelledby="accessibility-title">
             <div className="accessibility-panel-heading">
-              <Accessibility size={19} />
+              <div className="accessibility-panel-icon"><Accessibility size={19} /></div>
               <div>
-                <strong>Opções de acessibilidade</strong>
-                <span>Ajustes aplicados somente neste navegador.</span>
+                <strong id="accessibility-title">Acessibilidade</strong>
+                <span>Escolha os recursos que ajudam na sua leitura.</span>
               </div>
+              <button className="accessibility-close" onClick={() => setOpen(false)} aria-label="Fechar opções de acessibilidade"><X size={18} /></button>
             </div>
             <div className="accessibility-options">
               <button aria-pressed={highContrast} onClick={() => setHighContrast(!highContrast)}>
                 <Contrast size={17} />
                 <span><strong>Alto contraste</strong><small>Reforça cores e bordas.</small></span>
-                <span className="accessibility-check" aria-hidden="true">{highContrast ? "Ativo" : ""}</span>
+                <span className="accessibility-check" aria-hidden="true">{highContrast ? "Ativo" : "Ativar"}</span>
               </button>
               <button aria-pressed={largeText} onClick={() => setLargeText(!largeText)}>
                 <Type size={17} />
-                <span><strong>Texto maior</strong><small>Aumenta a leitura dos conteúdos.</small></span>
-                <span className="accessibility-check" aria-hidden="true">{largeText ? "Ativo" : ""}</span>
+                <span><strong>Texto maior</strong><small>Aumenta o tamanho do texto.</small></span>
+                <span className="accessibility-check" aria-hidden="true">{largeText ? "Ativo" : "Ativar"}</span>
               </button>
             </div>
-            <p className="accessibility-panel-note">Você pode fechar este painel sem perder suas escolhas.</p>
           </div>
-        )}
+        </div>
+      )}
       </div>
-    </div>
   );
 }
 
@@ -1143,11 +1150,11 @@ export default function Home() {
   const [booking, setBooking] = useState<Booking>(createDraft);
   const [appointments, setAppointments] = useState<Appointment[]>(() => {
     if (typeof window === "undefined") return [];
-    try { return JSON.parse(window.localStorage.getItem("ceuma-demo-appointments") ?? "[]") as Appointment[]; } catch { return []; }
+    try { return JSON.parse(window.localStorage.getItem("ceuma-mvp-appointments") ?? "[]") as Appointment[]; } catch { return []; }
   });
   const [confirmed, setConfirmed] = useState<Appointment | null>(() => {
     if (typeof window === "undefined") return null;
-    try { return JSON.parse(window.localStorage.getItem("ceuma-demo-confirmed") ?? "null") as Appointment | null; } catch { return null; }
+    try { return JSON.parse(window.localStorage.getItem("ceuma-mvp-confirmed") ?? "null") as Appointment | null; } catch { return null; }
   });
   const [highContrast, setHighContrast] = useState(() => typeof window !== "undefined" && window.localStorage.getItem("ceuma-high-contrast") === "true");
   const [largeText, setLargeText] = useState(() => typeof window !== "undefined" && window.localStorage.getItem("ceuma-large-text") === "true");
@@ -1191,7 +1198,7 @@ export default function Home() {
   const cancelAppointment = (protocol: string) => {
     setAppointments((prev) => prev.filter((item) => item.protocol !== protocol));
   };
-  const resetDemo = () => {
+  const resetLocalData = () => {
     setBooking(createDraft());
     setAppointments([]);
     setConfirmed(null);
@@ -1199,11 +1206,11 @@ export default function Home() {
     go("/");
   };
   useEffect(() => {
-    window.localStorage.setItem("ceuma-demo-appointments", JSON.stringify(appointments));
+    window.localStorage.setItem("ceuma-mvp-appointments", JSON.stringify(appointments));
   }, [appointments]);
   useEffect(() => {
-    if (confirmed) window.localStorage.setItem("ceuma-demo-confirmed", JSON.stringify(confirmed));
-    else window.localStorage.removeItem("ceuma-demo-confirmed");
+    if (confirmed) window.localStorage.setItem("ceuma-mvp-confirmed", JSON.stringify(confirmed));
+    else window.localStorage.removeItem("ceuma-mvp-confirmed");
   }, [confirmed]);
   useEffect(() => {
     window.localStorage.setItem("ceuma-high-contrast", String(highContrast));
@@ -1213,7 +1220,7 @@ export default function Home() {
     const title =
       navItems.find(([, path]) => path === cleanPath)?.[0] ??
       specialty?.name ??
-      "Protótipo";
+      "MVP";
     document.title = `${title} · Clínica-Escola Integrada Ana Lúcia Chaves Fecury`;
     window.scrollTo({ top: 0, behavior: "instant" });
     const main = document.querySelector("main");
@@ -1269,7 +1276,7 @@ export default function Home() {
   else if (cleanPath === "/ajuda") content = <HelpPage go={go} />;
   else if (cleanPath === "/sobre-proposta") content = <ProposalPage go={go} />;
   else if (cleanPath === "/privacidade")
-    content = <PrivacyPage go={go} resetDemo={resetDemo} />;
+    content = <PrivacyPage go={go} resetLocalData={resetLocalData} />;
   else if (cleanPath === "/whatsapp")
     content = <WhatsAppPage booking={messageBooking ?? booking} go={go} />;
   else
@@ -1291,13 +1298,12 @@ export default function Home() {
         Pular para o conteúdo
       </a>
       <Header go={go} location={cleanPath} />
-      <div className="prototype-banner">
+      <div className="mvp-banner">
         <span>
-          Protótipo acadêmico · Dados e contatos fictícios · Sem reserva ou
-          envio real
+          MVP acadêmico · Informações para orientação e atendimento
         </span>
-        <button onClick={() => go("/privacidade")}>
-          Entenda a demonstração <ArrowRight size={13} />
+        <button onClick={() => go("/privacidade") }>
+          Sobre o MVP <ArrowRight size={13} />
         </button>
       </div>
       <AccessibilityControls highContrast={highContrast} setHighContrast={setHighContrast} largeText={largeText} setLargeText={setLargeText} />

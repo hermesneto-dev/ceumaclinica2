@@ -38,7 +38,7 @@ import {
   localDate,
   monthLabel,
   parseDate,
-  demoPatient,
+  defaultPatient,
   type Booking,
   type Patient,
   type Appointment,
@@ -51,13 +51,13 @@ type DraftProps = {
   go: Go;
 };
 
-export function DemoNotice({ children }: { children?: ReactNode }) {
+export function MvpNotice({ children }: { children?: ReactNode }) {
   return (
-    <div className="privacy-callout demo-callout" role="note">
+    <div className="privacy-callout mvp-callout" role="note">
       <Info size={18} />
       <p>
         {children ??
-          "Esta é uma simulação acadêmica. Use apenas dados fictícios. Nenhum horário é reservado e nenhuma mensagem é enviada à clínica."}
+          "Este MVP organiza o atendimento sem reservar horários ou enviar mensagens à clínica."}
       </p>
     </div>
   );
@@ -85,22 +85,22 @@ export function BookingPage({ booking, setBooking, go }: DraftProps) {
   return (
     <main className="content-page booking-page">
       <PageIntro
-        eyebrow="Agendamento demonstrativo"
+        eyebrow="Agendamento disponível"
         title="Escolha o melhor momento para você"
-        description="Escolha um horário de exemplo. Você pode revisar tudo antes de concluir a simulação."
+        description="Escolha um horário de atendimento. Você pode revisar tudo antes de concluir."
         go={go}
       />
       <Progress current={1} />
       <section className="container booking-layout">
         <div className="booking-main">
-          <DemoNotice />
+          <MvpNotice />
           <div className="form-section">
             <div className="section-title-row">
               <div>
                 <span className="eyebrow">01 · Atendimento</span>
                 <h2>O que você precisa?</h2>
               </div>
-              <span className="form-hint">Agenda fictícia</span>
+              <span className="form-hint">Agenda informada</span>
             </div>
             <div
               className="select-grid"
@@ -147,7 +147,7 @@ export function BookingPage({ booking, setBooking, go }: DraftProps) {
               </div>
               <div>
                 <strong>{specialty.professional}</strong>
-                <span>{specialty.name} · profissional fictício</span>
+                <span>{specialty.name} · profissional informado</span>
               </div>
               <CheckCircle2 size={19} />
             </div>
@@ -183,7 +183,7 @@ export function BookingPage({ booking, setBooking, go }: DraftProps) {
               </div>
             </div>
             <p className="schedule-explanation">
-              Agenda demonstrativa: {specialty.days.toLowerCase()}.
+              Agenda do MVP: {specialty.days.toLowerCase()}.
             </p>
             <div
               className="date-picker"
@@ -209,7 +209,7 @@ export function BookingPage({ booking, setBooking, go }: DraftProps) {
             </div>
             {dates.length === 0 && (
               <p className="schedule-empty" role="status">
-                Não há horários de exemplo neste mês. Avance para o próximo mês.
+                Não há horários de atendimento neste mês. Avance para o próximo mês.
               </p>
             )}
             <div
@@ -234,7 +234,7 @@ export function BookingPage({ booking, setBooking, go }: DraftProps) {
             </div>
             <div className="availability-note">
               <span className="status-dot" /> Escolha um horário disponível na
-              simulação.
+              atendimento.
             </div>
           </div>
           <Button
@@ -256,7 +256,7 @@ export function BookingPage({ booking, setBooking, go }: DraftProps) {
           />
           <SummaryRow
             icon={<UserRound size={16} />}
-            label="Profissional fictício"
+            label="Profissional informado"
             value={specialty.professional}
           />
           <SummaryRow
@@ -267,7 +267,7 @@ export function BookingPage({ booking, setBooking, go }: DraftProps) {
           <div className="privacy-mini">
             <ShieldCheck size={16} />
             <span>
-              Dados fictícios mantidos somente neste navegador, sem envio à clínica.
+              Dados informados mantidos somente neste navegador, sem envio à clínica.
             </span>
           </div>
         </aside>
@@ -340,9 +340,9 @@ export function PatientFormPage({ booking, setBooking, go }: DraftProps) {
   return (
     <main className="content-page booking-page">
       <PageIntro
-        eyebrow="Agendamento demonstrativo"
+        eyebrow="Agendamento disponível"
         title="Vamos preparar seu atendimento"
-        description="Preencha somente informações fictícias para experimentar a proposta."
+        description="Preencha somente as informações necessárias para continuar."
         go={go}
       />
       <Progress current={2} />
@@ -350,42 +350,42 @@ export function PatientFormPage({ booking, setBooking, go }: DraftProps) {
         <form
           className="patient-form"
           onSubmit={submit}
-          aria-describedby="demo-form-note"
+          aria-describedby="mvp-form-note"
         >
           <div className="section-title-row">
             <div>
-              <span className="eyebrow">Dados do paciente de exemplo</span>
-              <h2>Vamos testar o cadastro?</h2>
+              <span className="eyebrow">Dados do paciente</span>
+              <h2>Vamos preparar seu cadastro</h2>
             </div>
             <span className="required-note">* obrigatório</span>
           </div>
-          <div id="demo-form-note">
-            <DemoNotice>
+          <div id="mvp-form-note">
+            <MvpNotice>
               Não insira dados pessoais reais. Os campos já trazem um perfil de
-              exemplo e nada será enviado ou gravado em um sistema da clínica.
-            </DemoNotice>
+              atendimento e nada será enviado ou gravado em um sistema da clínica.
+            </MvpNotice>
           </div>
           <button
             type="button"
-            className="edit-link demo-fill"
+            className="edit-link mvp-fill"
             onClick={() => {
-              setPatient({ ...demoPatient });
+              setPatient({ ...defaultPatient });
               setError("");
             }}
           >
-            Repor dados fictícios de exemplo <ArrowRight size={14} />
+            Repor dados informados de atendimento <ArrowRight size={14} />
           </button>
           <div className="field-grid">
             <InputField
-              label="Nome completo fictício"
+              label="Nome completo"
               value={patient.name}
               onChange={update("name")}
-              placeholder="Nome e sobrenome de exemplo"
+              placeholder="Nome e sobrenome"
               maxLength={100}
               required
             />
             <InputField
-              label="Telefone fictício"
+              label="Telefone"
               value={patient.phone}
               onChange={update("phone")}
               placeholder="(00) 00000-0000"
@@ -394,20 +394,20 @@ export function PatientFormPage({ booking, setBooking, go }: DraftProps) {
               required
             />
             <InputField
-              label="CPF fictício (opcional)"
+              label="CPF (opcional)"
               value={patient.cpf}
               onChange={update("cpf")}
               placeholder="000.000.000-00"
               maxLength={14}
             />
             <InputField
-              label="Nascimento fictício (opcional)"
+              label="Nascimento (opcional)"
               value={patient.birth}
               onChange={update("birth")}
               type="date"
             />
             <InputField
-              label="E-mail fictício (opcional)"
+              label="E-mail (opcional)"
               value={patient.email}
               onChange={update("email")}
               placeholder="pessoa@example.com"
@@ -415,15 +415,15 @@ export function PatientFormPage({ booking, setBooking, go }: DraftProps) {
               maxLength={120}
             />
             <InputField
-              label="Endereço fictício (opcional)"
+              label="Endereço (opcional)"
               value={patient.address}
               onChange={update("address")}
-              placeholder="Rua de exemplo, número e bairro"
+              placeholder="Rua de atendimento, número e bairro"
               maxLength={180}
             />
           </div>
           <label className="field">
-            <span>Tipo de atendimento de exemplo (opcional)</span>
+            <span>Tipo de atendimento (opcional)</span>
             <select
               value={patient.purpose}
               onChange={(event) => update("purpose")(event.target.value)}
@@ -438,7 +438,7 @@ export function PatientFormPage({ booking, setBooking, go }: DraftProps) {
             </select>
           </label>
           <p className="schedule-explanation" id="purpose-note">
-            Escolha somente uma opção de exemplo. Não informe sintomas,
+            Escolha uma opção de atendimento. Não informe sintomas,
             diagnósticos ou outros dados reais de saúde.
           </p>
           {error && (
@@ -462,8 +462,8 @@ export function PatientFormPage({ booking, setBooking, go }: DraftProps) {
           </div>
         </form>
         <aside className="booking-summary sticky-summary">
-          <span className="eyebrow">Escolha demonstrativa</span>
-          <h3>Confira o que você escolheu.</h3>
+          <span className="eyebrow">Sua escolha</span>
+          <h3>Confira suas escolhas.</h3>
           <div className="summary-divider" />
           <SummaryRow
             icon={<Stethoscope size={16} />}
@@ -512,7 +512,7 @@ export function ReviewPage({
   return (
     <main className="content-page booking-page">
       <PageIntro
-        eyebrow="Agendamento demonstrativo"
+        eyebrow="Agendamento disponível"
         title="Está tudo certo?"
         description="Confira seus dados antes de confirmar."
         go={go}
@@ -537,7 +537,7 @@ export function ReviewPage({
             />
             <SummaryRow
               icon={<UserRound size={16} />}
-              label="Profissional fictício"
+              label="Profissional informado"
               value={booking.professional}
             />
             <SummaryRow
@@ -547,24 +547,23 @@ export function ReviewPage({
             />
             <SummaryRow
               icon={<UserRound size={16} />}
-              label="Paciente de exemplo"
+              label="Paciente de atendimento"
               value={booking.patient.name}
             />
             <SummaryRow
               icon={<Phone size={16} />}
-              label="Telefone fictício"
+              label="Telefone"
               value={booking.patient.phone}
             />
             <SummaryRow
               icon={<Info size={16} />}
-              label="Tipo de atendimento de exemplo"
+              label="Tipo de atendimento"
               value={booking.patient.purpose || "Não informado"}
             />
           </div>
-          <DemoNotice>
-            Confirmar adiciona este exemplo à lista local da demonstração. Não
-            há reserva real, envio à clínica ou mensagem por WhatsApp.
-          </DemoNotice>
+          <MvpNotice>
+            Confirmar salva este atendimento somente neste navegador. Nenhum dado é enviado à clínica ou ao WhatsApp.
+          </MvpNotice>
           {!valid && (
             <p className="form-error" role="alert">
               Revise o horário e o cadastro antes de confirmar.
@@ -586,11 +585,10 @@ export function ReviewPage({
           <span className="eyebrow">Comunicação proposta</span>
           <h3>Informação por perto.</h3>
           <p>
-            Uma solução futura poderia enviar confirmação e lembrete. Aqui você
-            pode ver somente um exemplo visual, sem integração ativa.
+            O WhatsApp pode ser integrado futuramente com validação, consentimento e segurança adequados.
           </p>
           <button onClick={() => go("/whatsapp")}>
-            Ver exemplo da mensagem <ArrowRight size={15} />
+            Ver atendimento da mensagem <ArrowRight size={15} />
           </button>
         </aside>
       </section>
@@ -616,19 +614,18 @@ export function SuccessPage({
         <div className="success-icon">
           <Check size={34} />
         </div>
-        <span className="eyebrow">Simulação concluída</span>
+        <span className="eyebrow">Agendamento concluído</span>
         <h1>
           Agendamento realizado
           <br />
           <em>com sucesso!</em>
         </h1>
         <p className="success-lead">
-          Seu exemplo foi adicionado à demonstração. Nenhum horário real foi
-          reservado.
+          Seu atendimento foi salvo neste navegador. Nenhum horário foi reservado.
         </p>
         <div className="success-booking-card">
           <div className="protocol">
-            <span>PROTOCOLO DEMONSTRATIVO</span>
+            <span>PROTOCOLO DE ATENDIMENTO</span>
             <strong>{appointment.protocol}</strong>
           </div>
           <div className="success-details">
@@ -643,14 +640,14 @@ export function SuccessPage({
               </strong>
             </div>
             <div>
-              <small>Local ilustrativo</small>
+              <small>Local informativo</small>
               <strong>Unidade Renascença</strong>
             </div>
           </div>
           <div className="success-whatsapp">
             <MessageCircle size={17} />
             <span>
-              Proposta de confirmação e lembrete por WhatsApp, sem envio real.
+              Confirmação e lembrete por WhatsApp podem ser integrados futuramente.
             </span>
           </div>
         </div>
@@ -663,7 +660,7 @@ export function SuccessPage({
           </Button>
         </div>
         <button className="success-detail-link" onClick={showMessage}>
-          Visualizar simulação do WhatsApp <ArrowRight size={15} />
+          Visualizar mensagem do WhatsApp <ArrowRight size={15} />
         </button>
       </div>
     </main>
@@ -694,9 +691,9 @@ export function AppointmentsPage({
   return (
     <main className="content-page">
       <PageIntro
-        eyebrow="Área demonstrativa do paciente"
+        eyebrow="Área do paciente"
         title="Meus agendamentos"
-        description="Os exemplos confirmados aparecem aqui e ficam salvos somente neste navegador para facilitar a apresentação."
+        description="Os atendimentos confirmados ficam salvos somente neste navegador."
         go={go}
       />
       <section className="container appointments-layout">
@@ -739,13 +736,13 @@ export function AppointmentsPage({
                 <CalendarDays size={28} />
                 <h2>
                   {tab === "upcoming"
-                    ? "Nenhum exemplo confirmado ainda"
+                    ? "Nenhum atendimento confirmado ainda"
                     : "Nenhum atendimento no histórico"}
                 </h2>
                 <p>
                   {tab === "upcoming"
-                    ? "Experimente o fluxo de agendamento. A confirmação será exibida nesta lista, sem reserva real."
-                    : "Atendimentos demonstrativos com datas passadas apareceriam aqui."}
+                    ? "Ao confirmar um agendamento, ele aparecerá nesta lista. Nenhum horário é reservado."
+                    : "Atendimentos com datas passadas aparecerão aqui."}
                 </p>
                 <Button onClick={newBooking}>
                   Novo agendamento <ArrowRight size={16} />
@@ -764,8 +761,8 @@ export function AppointmentsPage({
                       <span className="confirmed-pill">
                         <Check size={13} />{" "}
                         {tab === "upcoming"
-                          ? "Confirmado · simulação"
-                          : "Data passada · simulação"}
+                          ? "Confirmado"
+                          : "Data passada"}
                       </span>
                       <button
                         className="detail-toggle"
@@ -795,14 +792,14 @@ export function AppointmentsPage({
                         <span className="eyebrow">{specialty.eyebrow}</span>
                         <h2>{specialty.name}</h2>
                         <p>
-                          <UserRound size={15} /> {item.professional} · fictício
+                          <UserRound size={15} /> {item.professional} · informado
                         </p>
                         <p>
                           <Clock3 size={15} /> {item.time}
                         </p>
                         <p>
                           <MapPin size={15} /> Unidade Renascença · local
-                          ilustrativo
+                          informativo
                         </p>
                       </div>
                     </div>
@@ -815,7 +812,7 @@ export function AppointmentsPage({
                           <strong>Protocolo:</strong> {item.protocol}
                         </p>
                         <p>
-                          <strong>Paciente de exemplo:</strong>{" "}
+                          <strong>Paciente de atendimento:</strong>{" "}
                           {item.patient.name}
                         </p>
                         <p>
@@ -832,10 +829,10 @@ export function AppointmentsPage({
                         <CalendarDays size={15} /> Alterar data ou horário
                       </button>
                       <button onClick={() => cancelAppointment(item.protocol)}>
-                        <X size={15} /> Cancelar exemplo
+                        <X size={15} /> Cancelar atendimento
                       </button>
                       <button onClick={() => showMessage(item)}>
-                        <MessageCircle size={15} /> Ver lembrete simulado
+                        <MessageCircle size={15} /> Ver lembrete registrado
                       </button>
                       <button onClick={() => go("/informacoes")}>
                         <MapPin size={15} /> Informações do local
@@ -857,7 +854,7 @@ export function AppointmentsPage({
           <span className="eyebrow">Experimente a proposta</span>
           <h3>Um cuidado mais simples.</h3>
           <p>
-            Esta lista é temporária e demonstrativa. Para um atendimento real,
+            Esta lista é temporária e do MVP. Para um atendimento real,
             confirme os canais oficiais da clínica.
           </p>
           <Button variant="soft" onClick={newBooking}>
@@ -881,13 +878,13 @@ export function WhatsAppPage({ booking, go }: { booking: Booking; go: Go }) {
       <PageIntro
         eyebrow="Comunicação proposta"
         title="Assim pode ser o seu WhatsApp"
-        description="Uma simulação de como confirmações e lembretes poderiam chegar. Não há integração ativa nem envio de mensagens."
+        description="Veja como confirmações e lembretes podem ser organizados. A integração de mensagens ainda será definida."
         go={go}
       />
       <section className="container whatsapp-layout">
         <div
           className="phone-frame"
-          aria-label="Exemplo visual de mensagens por WhatsApp"
+          aria-label="Atendimento visual de mensagens por WhatsApp"
         >
           <div className="phone-notch" />
           <div className="wa-header">
@@ -908,14 +905,14 @@ export function WhatsAppPage({ booking, go }: { booking: Booking; go: Go }) {
             </div>
             <div>
               <strong>Clínica-Escola Integrada</strong>
-              <span>Ana Lúcia Chaves Fecury · simulação</span>
+              <span>Ana Lúcia Chaves Fecury</span>
             </div>
           </div>
           <div className="chat-area">
-            <div className="chat-date">EXEMPLO FICTÍCIO</div>
+            <div className="chat-date">MENSAGEM DE ATENDIMENTO</div>
             <div className="message received">
               <p>
-                Olá, {booking.patient.name.split(" ")[0]}! Este seria um exemplo
+                Olá, {booking.patient.name.split(" ")[0]}! Este seria um atendimento
                 de confirmação da Clínica-Escola Integrada Ana Lúcia Chaves
                 Fecury.
               </p>
@@ -928,7 +925,7 @@ export function WhatsAppPage({ booking, go }: { booking: Booking; go: Go }) {
                 </strong>
               </div>
               <small>
-                Exemplo de confirmação{" "}
+                Atendimento de confirmação{" "}
                 <span className="checks" aria-hidden="true">
                   ✓✓
                 </span>
@@ -944,7 +941,7 @@ export function WhatsAppPage({ booking, go }: { booking: Booking; go: Go }) {
                 oficiais da clínica.
               </p>
               <small>
-                Exemplo de lembrete{" "}
+                Atendimento de lembrete{" "}
                 <span className="checks" aria-hidden="true">
                   ✓✓
                 </span>
@@ -960,12 +957,10 @@ export function WhatsAppPage({ booking, go }: { booking: Booking; go: Go }) {
           <div className="whatsapp-badge">
             <MessageCircle size={21} />
           </div>
-          <span className="eyebrow">Para a apresentação</span>
+          <span className="eyebrow">Comunicação do atendimento</span>
           <h2>Mais clareza, menos preocupação.</h2>
           <p>
-            O WhatsApp aparece como possibilidade futura. Uma solução real
-            dependeria de validação com a clínica, consentimento e integração
-            apropriada.
+            O WhatsApp pode ser integrado futuramente, com validação da clínica, consentimento e proteção adequada dos dados.
           </p>
           <div className="concept-list">
             <span>
@@ -989,43 +984,42 @@ export function WhatsAppPage({ booking, go }: { booking: Booking; go: Go }) {
 
 export function PrivacyPage({
   go,
-  resetDemo,
+  resetLocalData,
 }: {
   go: Go;
-  resetDemo: () => void;
+  resetLocalData: () => void;
 }) {
   return (
     <main className="content-page">
       <PageIntro
-        eyebrow="Privacidade na demonstração"
-        title="Use somente dados fictícios"
-        description="Este protótipo não é um canal de atendimento nem um sistema real da clínica."
+        eyebrow="Privacidade e dados"
+        title="Use somente os dados necessários"
+        description="Este MVP não substitui os canais oficiais de atendimento da clínica."
         go={go}
       />
       <section className="container privacy-content">
         <div className="patient-form">
           <h2>O que acontece com os dados?</h2>
           <p>
-            As informações digitadas e os agendamentos simulados ficam somente
+            As informações digitadas e os agendamentos registrados ficam somente
             na memória da página enquanto ela está aberta. Não são enviados à
             clínica, a um banco de dados ou ao WhatsApp. Recarregar a página ou
-            reiniciar a demonstração remove esses exemplos.
+            reiniciar o MVP remove esses atendimentos.
           </p>
-          <h2>O que usar na apresentação?</h2>
+          <h2>Como usar este MVP?</h2>
           <p>
-            Use o perfil fictício já preenchido ou invente dados de exemplo. Não
+            Use os dados já preenchidos ou informe dados de atendimento. Não
             insira CPF, telefone, endereço, e-mail ou outras informações reais.
-            Esta orientação descreve a demonstração, não substitui uma política
-            de privacidade de um serviço real.
+            Esta orientação não substitui a política de privacidade de um serviço real.
           </p>
-          <h2>Como seria uma solução real?</h2>
+          <h2>Próximos passos</h2>
           <p>
             A finalidade proposta seria organizar atendimento e agendamento.
             Qualquer implementação real dependeria de validação institucional,
             regras de acesso, proteção dos dados e informação clara ao paciente.
           </p>
           <div className="form-actions">
-            <Button onClick={resetDemo}>Reiniciar demonstração</Button>
+            <Button onClick={resetLocalData}>Limpar dados locais</Button>
             <Button variant="ghost" onClick={() => go("/ajuda")}>
               Ver opções de ajuda <ArrowRight size={16} />
             </Button>
@@ -1043,11 +1037,11 @@ export function MissingConfirmationPage({ go }: { go: Go }) {
         <CalendarDays size={32} />
         <h1>Ainda não há confirmação nesta visita</h1>
         <p>
-          Conclua a revisão para gerar um exemplo de agendamento. Nenhum horário
+          Conclua a revisão para gerar um atendimento de agendamento. Nenhum horário
           real será reservado.
         </p>
         <Button onClick={() => go("/agendamento")}>
-          Experimentar agendamento <ArrowRight size={16} />
+          Começar agendamento <ArrowRight size={16} />
         </Button>
       </section>
     </main>

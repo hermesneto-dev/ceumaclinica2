@@ -132,7 +132,7 @@ export function availableDates(
     today.getDate(),
     12,
   );
-  // A agenda é uma demonstração: só oferece dias futuros da semana da especialidade.
+  // A agenda do MVP: só oferece dias futuros da semana da especialidade.
   for (let offset = 1; offset <= 28 && result.length < 4; offset++) {
     cursor.setDate(cursor.getDate() + 1);
     if (days.includes(cursor.getDay())) result.push(localDate(cursor));
@@ -213,13 +213,13 @@ export function selectSpecialty(booking: Booking, id: string): Booking {
   };
 }
 
-export const demoPatient: Patient = {
+export const defaultPatient: Patient = {
   name: "Mariana Costa",
   cpf: "123.456.789-00",
   birth: "1994-04-15",
   phone: "(98) 98888-1111",
   email: "mariana@example.com",
-  address: "Rua Exemplo, 120 — endereço fictício",
+  address: "Rua Atendimento, 120 — endereço",
   purpose: "Consulta inicial",
 };
 
@@ -229,18 +229,18 @@ export function createDraft(): Booking {
     professional: specialties[0].professional,
     date: availableDates(specialties[0].id)[0],
     time: specialties[0].times[0],
-    patient: { ...demoPatient },
+    patient: { ...defaultPatient },
   };
 }
 
 export function validatePatient(patient: Patient): string | null {
   if (patient.name.trim().split(/\s+/).length < 2)
-    return "Informe o nome completo fictício para a demonstração.";
+    return "Informe o nome completo para a MVP.";
   const phone = patient.phone.replace(/\D/g, "");
   if (phone.length < 10 || phone.length > 11)
-    return "Informe um telefone fictício com DDD e 10 ou 11 dígitos.";
+    return "Informe um telefone válido com DDD e 10 ou 11 dígitos.";
   if (patient.cpf && patient.cpf.replace(/\D/g, "").length !== 11)
-    return "O CPF demonstrativo deve conter 11 dígitos.";
+    return "O CPF informado deve conter 11 dígitos.";
   if (patient.birth) {
     const date = parseDate(patient.birth);
     if (
@@ -253,10 +253,10 @@ export function validatePatient(patient: Patient): string | null {
     }
   }
   if (patient.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(patient.email))
-    return "Confira o formato do e-mail fictício.";
+    return "Confira o formato do e-mail.";
   return null;
 }
 
 export function createProtocol(date: string, sequence: number): string {
-  return `DEMO-${date.replace(/-/g, "")}-${String(sequence).padStart(3, "0")}`;
+  return `CEUMA-${date.replace(/-/g, "")}-${String(sequence).padStart(3, "0")}`;
 }

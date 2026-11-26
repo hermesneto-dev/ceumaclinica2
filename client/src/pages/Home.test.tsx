@@ -33,25 +33,25 @@ function render(path: string) {
   );
 }
 
-describe("páginas do protótipo migrado", () => {
+describe("páginas do MVP", () => {
   for (const route of routes) {
-    it(`renderiza ${route} com navegação e aviso demonstrativo`, () => {
+    it(`renderiza ${route} com navegação e aviso institucional`, () => {
       const html = render(route);
       expect(html).toContain("Clínica-Escola Integrada");
-      expect(html).toContain("Protótipo acadêmico");
-      expect(html).toContain("Sem reserva ou envio real");
+      expect(html).toContain("MVP acadêmico");
+      expect(html).toContain("Informações para orientação e atendimento");
       expect(html).toContain("<main");
     });
   }
-  it("não exibe sucesso sem confirmar um exemplo", () => {
+  it("não exibe sucesso sem confirmar um agendamento", () => {
     const html = render("/sucesso");
     expect(html).toContain("Ainda não há confirmação nesta visita");
     expect(html).not.toContain("Agendamento realizado");
   });
   it("não inventa uma confirmação na lista inicial", () => {
     const html = render("/agendamentos");
-    expect(html).toContain("Nenhum exemplo confirmado ainda");
-    expect(html).not.toContain("Confirmado · simulação");
+    expect(html).toContain("Nenhum atendimento confirmado ainda");
+    expect(html).not.toContain("Confirmado");
   });
   it("não transforma especialidade desconhecida em clínica médica", () => {
     expect(render("/especialidades/inexistente")).toContain(
@@ -66,18 +66,18 @@ describe("páginas do protótipo migrado", () => {
   });
   it("mantém o WhatsApp como representação, sem promessa de envio", () => {
     const html = render("/whatsapp");
-    expect(html).toContain("Não há integração ativa nem envio de mensagens");
+    expect(html).toContain("A integração de mensagens ainda será definida");
     expect(html).not.toContain("Você receberá");
   });
   it("mostra horários disponíveis no detalhe da especialidade", () => {
     const html = render("/especialidades/clinica-medica");
-    expect(html).toContain("Horários demonstrativos disponíveis");
+    expect(html).toContain("Horários disponíveis");
     expect(html).toContain("08:00");
     expect(html).not.toContain("16:00");
   });
-  it("inclui tipo de atendimento fictício sem solicitar dados clínicos", () => {
+  it("inclui tipo de atendimento sem solicitar dados clínicos", () => {
     const html = render("/cadastro");
-    expect(html).toContain("Tipo de atendimento de exemplo");
+    expect(html).toContain("Tipo de atendimento (opcional)");
     expect(html).toContain("Não informe sintomas, diagnósticos");
   });
   it("apresenta FAQ e conteúdo acadêmico separado", () => {

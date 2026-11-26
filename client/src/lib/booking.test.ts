@@ -3,7 +3,7 @@ import {
   availableDates,
   createDraft,
   dateParts,
-  demoPatient,
+  defaultPatient,
   formatDate,
   localDate,
   parseDate,
@@ -21,7 +21,7 @@ beforeEach(() => {
 });
 afterEach(() => vi.useRealTimers());
 
-describe("agenda demonstrativa", () => {
+describe("agenda do MVP", () => {
   const expectedDays: Record<string, number[]> = {
     "clinica-medica": [2, 4],
     cardiologia: [1, 3],
@@ -67,12 +67,12 @@ describe("agenda demonstrativa", () => {
   });
 });
 
-describe("cadastro fictício", () => {
-  it("aceita o perfil de demonstração e não exige campos opcionais", () => {
-    expect(validatePatient(demoPatient)).toBeNull();
+describe("cadastro", () => {
+  it("aceita o perfil padrão e não exige campos opcionais", () => {
+    expect(validatePatient(defaultPatient)).toBeNull();
     expect(
       validatePatient({
-        ...demoPatient,
+        ...defaultPatient,
         cpf: "",
         birth: "",
         email: "",
@@ -81,35 +81,35 @@ describe("cadastro fictício", () => {
     ).toBeNull();
   });
   it("orienta nome completo, telefone, CPF, nascimento e e-mail inválidos", () => {
-    expect(validatePatient({ ...demoPatient, name: "   " })).toMatch(
+    expect(validatePatient({ ...defaultPatient, name: "   " })).toMatch(
       /nome completo/,
     );
-    expect(validatePatient({ ...demoPatient, name: "Mariana" })).toMatch(
+    expect(validatePatient({ ...defaultPatient, name: "Mariana" })).toMatch(
       /nome completo/,
     );
-    expect(validatePatient({ ...demoPatient, phone: "123" })).toMatch(
+    expect(validatePatient({ ...defaultPatient, phone: "123" })).toMatch(
       /telefone/,
     );
-    expect(validatePatient({ ...demoPatient, cpf: "12" })).toMatch(/CPF/);
-    expect(validatePatient({ ...demoPatient, birth: "2026-02-30" })).toMatch(
+    expect(validatePatient({ ...defaultPatient, cpf: "12" })).toMatch(/CPF/);
+    expect(validatePatient({ ...defaultPatient, birth: "2026-02-30" })).toMatch(
       /nascimento/,
     );
-    expect(validatePatient({ ...demoPatient, birth: "2027-01-01" })).toMatch(
+    expect(validatePatient({ ...defaultPatient, birth: "2027-01-01" })).toMatch(
       /nascimento/,
     );
-    expect(validatePatient({ ...demoPatient, email: "invalido" })).toMatch(
+    expect(validatePatient({ ...defaultPatient, email: "invalido" })).toMatch(
       /e-mail/,
     );
   });
   it("gera rascunhos independentes sem compartilhar mutações do paciente", () => {
     const first = createDraft();
     const second = createDraft();
-    first.patient.name = "Outro Exemplo";
-    expect(second.patient.name).toBe(demoPatient.name);
+    first.patient.name = "Outro Paciente";
+    expect(second.patient.name).toBe(defaultPatient.name);
   });
-  it("gera protocolos de demonstração diferentes por confirmação", () => {
+  it("gera protocolos diferentes por confirmação", () => {
     const date = createDraft().date;
-    expect(createProtocol(date, 1)).toMatch(/^DEMO-\d{8}-001$/);
+    expect(createProtocol(date, 1)).toMatch(/^CEUMA-\d{8}-001$/);
     expect(createProtocol(date, 1)).not.toBe(createProtocol(date, 2));
   });
 });
