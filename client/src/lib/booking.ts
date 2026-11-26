@@ -140,6 +140,28 @@ export function availableDates(
   return result;
 }
 
+export function availableDatesInMonth(
+  specialtyId: string,
+  monthOffset = 0,
+  today = new Date(),
+): string[] {
+  const days = scheduleDays[specialtyId] ?? scheduleDays["clinica-medica"];
+  const start = new Date(today.getFullYear(), today.getMonth() + monthOffset, 1, 12);
+  const result: string[] = [];
+  for (let day = 1; day <= 31; day += 1) {
+    const cursor = new Date(start.getFullYear(), start.getMonth(), day, 12);
+    if (cursor.getMonth() !== start.getMonth()) break;
+    if (cursor <= new Date(today.getFullYear(), today.getMonth(), today.getDate(), 12)) continue;
+    if (days.includes(cursor.getDay())) result.push(localDate(cursor));
+  }
+  return result;
+}
+
+export function monthLabel(monthOffset = 0, today = new Date()): string {
+  return new Date(today.getFullYear(), today.getMonth() + monthOffset, 1, 12)
+    .toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+}
+
 export function dateParts(value: string) {
   const date = parseDate(value);
   return {
@@ -168,9 +190,12 @@ export function unavailableTime(specialtyId: string, time: string): boolean {
 
 export function validSelection(booking: Booking): boolean {
   const specialty = specialties.find((item) => item.id === booking.specialtyId);
+  const futureDates = [0, 1, 2, 3].flatMap((monthOffset) =>
+    availableDatesInMonth(booking.specialtyId, monthOffset),
+  );
   return Boolean(
     specialty &&
-      availableDates(booking.specialtyId).includes(booking.date) &&
+      futureDates.includes(booking.date) &&
       specialty.times.includes(booking.time) &&
       !unavailableTime(booking.specialtyId, booking.time),
   );

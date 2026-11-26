@@ -1,4 +1,5 @@
 import {
+  useEffect,
   useState,
   type Dispatch,
   type SetStateAction,
@@ -20,11 +21,13 @@ import {
   ShieldCheck,
   Stethoscope,
   UserRound,
+  X,
 } from "lucide-react";
 import { CareIcon } from "./CareIcon";
 import { Button, PageIntro, Progress, SummaryRow } from "./ClinicUI";
 import {
   specialties,
+  availableDatesInMonth,
   availableDates,
   dateParts,
   formatDate,
@@ -33,6 +36,8 @@ import {
   validSelection,
   validatePatient,
   localDate,
+  monthLabel,
+  parseDate,
   demoPatient,
   type Booking,
   type Patient,
@@ -62,7 +67,21 @@ export function BookingPage({ booking, setBooking, go }: DraftProps) {
   const specialty =
     specialties.find((item) => item.id === booking.specialtyId) ??
     specialties[0];
-  const dates = availableDates(specialty.id);
+  const firstDate = availableDates(specialty.id)[0];
+  const [monthOffset, setMonthOffset] = useState(() => {
+    if (!firstDate) return 0;
+    const target = parseDate(firstDate);
+    const today = new Date();
+    return (target.getFullYear() - today.getFullYear()) * 12 + target.getMonth() - today.getMonth();
+  });
+  useEffect(() => {
+    if (!firstDate) return;
+    const target = parseDate(firstDate);
+    const today = new Date();
+    setMonthOffset((target.getFullYear() - today.getFullYear()) * 12 + target.getMonth() - today.getMonth());
+  }, [specialty.id, firstDate]);
+  const dates = availableDatesInMonth(specialty.id, monthOffset);
+  const canGoBack = monthOffset > 0;
   return (
     <main className="content-page booking-page">
       <PageIntro
@@ -139,9 +158,29 @@ export function BookingPage({ booking, setBooking, go }: DraftProps) {
                 <span className="eyebrow">03 · Data e horário</span>
                 <h2>Quando fica melhor?</h2>
               </div>
-              <span className="calendar-month">
-                <CalendarDays size={16} /> Próximas datas
-              </span>
+              <div className="calendar-controls" aria-label="Navegação do calendário">
+                <button
+                  type="button"
+                  className="calendar-nav"
+                  onClick={() => setMonthOffset((value) => Math.max(0, value - 1))}
+                  disabled={!canGoBack}
+                  aria-label="Mês anterior"
+                >
+                  <ArrowLeft size={14} />
+                </button>
+                <span className="calendar-month">
+                  <CalendarDays size={16} /> Próximas datas · {monthLabel(monthOffset)}
+                </span>
+                <button
+                  type="button"
+                  className="calendar-nav"
+                  onClick={() => setMonthOffset((value) => Math.min(3, value + 1))}
+                  disabled={monthOffset >= 3}
+                  aria-label="Próximo mês"
+                >
+                  <ArrowRight size={14} />
+                </button>
+              </div>
             </div>
             <p className="schedule-explanation">
               Agenda demonstrativa: {specialty.days.toLowerCase()}.
@@ -151,7 +190,7 @@ export function BookingPage({ booking, setBooking, go }: DraftProps) {
               role="group"
               aria-label="Data do atendimento"
             >
-              {dates.map((date) => {
+              {dates.slice(0, 6).map((date) => {
                 const part = dateParts(date);
                 return (
                   <button
@@ -168,6 +207,11 @@ export function BookingPage({ booking, setBooking, go }: DraftProps) {
                 );
               })}
             </div>
+            {dates.length === 0 && (
+              <p className="schedule-empty" role="status">
+                Não há horários de exemplo neste mês. Avance para o próximo mês.
+              </p>
+            )}
             <div
               className="time-grid"
               role="group"
@@ -223,8 +267,7 @@ export function BookingPage({ booking, setBooking, go }: DraftProps) {
           <div className="privacy-mini">
             <ShieldCheck size={16} />
             <span>
-              Dados mantidos apenas na memória desta página, sem envio à
-              clínica.
+              Dados fictícios mantidos somente neste navegador, sem envio à clínica.
             </span>
           </div>
         </aside>
@@ -632,11 +675,15 @@ export function AppointmentsPage({
   go,
   newBooking,
   showMessage,
+  editBooking,
+  cancelAppointment,
 }: {
   appointments: Appointment[];
   go: Go;
   newBooking: () => void;
   showMessage: (appointment: Appointment) => void;
+  editBooking: (appointment: Appointment) => void;
+  cancelAppointment: (protocol: string) => void;
 }) {
   const [tab, setTab] = useState<"upcoming" | "history">("upcoming");
   const [expanded, setExpanded] = useState<string | null>(null);
@@ -649,7 +696,7 @@ export function AppointmentsPage({
       <PageIntro
         eyebrow="Área demonstrativa do paciente"
         title="Meus agendamentos"
-        description="Os exemplos confirmados durante esta visita aparecem aqui. Ao recarregar a página, a demonstração recomeça."
+        description="Os exemplos confirmados aparecem aqui e ficam salvos somente neste navegador para facilitar a apresentação."
         go={go}
       />
       <section className="container appointments-layout">
@@ -781,6 +828,12 @@ export function AppointmentsPage({
                       </div>
                     )}
                     <div className="appointment-card-actions">
+                      <button onClick={() => editBooking(item)}>
+                        <CalendarDays size={15} /> Alterar data ou horário
+                      </button>
+                      <button onClick={() => cancelAppointment(item.protocol)}>
+                        <X size={15} /> Cancelar exemplo
+                      </button>
                       <button onClick={() => showMessage(item)}>
                         <MessageCircle size={15} /> Ver lembrete simulado
                       </button>

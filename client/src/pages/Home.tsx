@@ -8,6 +8,9 @@ import {
   ChevronRight,
   CircleHelp,
   Clock3,
+  ChevronDown,
+  Contrast,
+  GraduationCap,
   House,
   Info,
   Landmark,
@@ -19,6 +22,7 @@ import {
   Search,
   ShieldCheck,
   Sparkles,
+  Type,
   X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -65,6 +69,7 @@ const navItems = [
   ["Meus agendamentos", "/agendamentos"],
   ["Informações", "/informacoes"],
   ["Ajuda", "/ajuda"],
+  ["Sobre a proposta", "/sobre-proposta"],
 ] as const;
 
 function Header({
@@ -326,6 +331,27 @@ function HomePage({ go }: { go: (path: string) => void }) {
             <MessageCircle size={16} /> WhatsApp · simulação
           </button>
         </section>
+        <section className="container how-it-works" aria-labelledby="how-title">
+          <div>
+            <span className="eyebrow">Jornada demonstrativa</span>
+            <h2 id="how-title">Como funciona a proposta</h2>
+            <p>Uma experiência guiada para reduzir dúvidas antes do atendimento.</p>
+          </div>
+          <div className="how-steps">
+            {[
+              ["01", "Escolha uma especialidade", "Veja áreas e horários de exemplo."],
+              ["02", "Selecione data e horário", "Navegue pelo calendário demonstrativo."],
+              ["03", "Preencha dados fictícios", "Use o perfil de exemplo já preparado."],
+              ["04", "Revise e confirme", "O registro fica somente nesta demonstração."],
+            ].map(([number, title, text]) => (
+              <div className="how-step" key={number}>
+                <span>{number}</span>
+                <strong>{title}</strong>
+                <p>{text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
         <section className="home-section container">
           <SectionHeading
             eyebrow="Para você"
@@ -458,6 +484,8 @@ function SpecialtyCard({
       <span className="eyebrow">{specialty.eyebrow}</span>
       <h3>{specialty.name}</h3>
       <p>{specialty.description}</p>
+      <span className="data-badge">Agenda demonstrativa</span>
+      <small className="specialty-days">{specialty.days} · horários de exemplo</small>
       <button onClick={() => go(`/especialidades/${specialty.id}`)}>
         Ver horários <ArrowRight size={15} />
       </button>
@@ -467,10 +495,18 @@ function SpecialtyCard({
 
 function SpecialtiesPage({ go }: { go: (path: string) => void }) {
   const [search, setSearch] = useState("");
+  const relatedTerms: Record<string, string> = {
+    cardiologia: "coração cardiovascular pressão",
+    "clinica-medica": "clínico geral consulta rotina prevenção",
+    ginecologia: "mulher feminino prevenção",
+    pediatria: "criança adolescente infantil",
+    dermatologia: "pele cabelo unhas",
+  };
   const filtered = specialties.filter(
     (item) =>
       item.name.toLowerCase().includes(search.toLowerCase()) ||
-      item.description.toLowerCase().includes(search.toLowerCase()),
+      item.description.toLowerCase().includes(search.toLowerCase()) ||
+      relatedTerms[item.id].includes(search.toLowerCase().trim()),
   );
   return (
     <main className="content-page">
@@ -495,6 +531,9 @@ function SpecialtiesPage({ go }: { go: (path: string) => void }) {
           {filtered.length} opções encontradas
         </span>
       </div>
+      <p className="container search-hint">
+        Você também pode buscar por termos relacionados, como “coração”, “pele” ou “criança”.
+      </p>
       <section className="container specialty-grid">
         {filtered.length === 0 && (
           <div className="empty-state search-empty">
@@ -964,15 +1003,113 @@ function HelpPage({ go }: { go: (path: string) => void }) {
           </span>
         </div>
       </section>
+      <section className="container faq-section" aria-labelledby="faq-title">
+        <div className="section-heading">
+          <div>
+            <span className="eyebrow">Dúvidas frequentes</span>
+            <h2 id="faq-title">Respostas para começar</h2>
+          </div>
+          <span className="data-badge">Conteúdo demonstrativo</span>
+        </div>
+        <div className="faq-list">
+          {[
+            ["Como faço um agendamento?", "Escolha uma especialidade, uma data e um horário de exemplo. Depois, preencha o perfil fictício e revise a simulação."],
+            ["O atendimento digital é obrigatório?", "Não. A proposta mantém telefone e atendimento presencial como alternativas para quem preferir."],
+            ["Meus dados são enviados à clínica?", "Não. Este protótipo não envia dados e guarda exemplos somente neste navegador."],
+            ["Posso cancelar ou alterar um exemplo?", "Sim. Na área Meus agendamentos, use os controles locais de alterar ou cancelar a simulação."],
+          ].map(([question, answer]) => (
+            <details key={question}>
+              <summary>{question}<ChevronDown size={17} /></summary>
+              <p>{answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
     </main>
   );
+}
+
+function ProposalPage({ go }: { go: (path: string) => void }) {
+  const stakeholders = [
+    ["Pacientes", "Encontrar informações claras e autonomia para escolher o canal."],
+    ["Recepção", "Reduzir dúvidas repetitivas e organizar a chegada dos atendimentos."],
+    ["Profissionais e supervisores", "Visualizar uma jornada mais previsível para o cuidado."],
+    ["Coordenação", "Acompanhar uma proposta integrada sem perder o acolhimento."],
+  ];
+  return (
+    <main className="content-page proposal-page">
+      <PageIntro
+        eyebrow="Apresentação acadêmica"
+        title="Uma proposta para aproximar cuidado e informação"
+        description="Esta área explica o raciocínio do protótipo, seus limites e possibilidades futuras. Não é uma página de atendimento real."
+        action="Experimentar agendamento"
+        go={go}
+      />
+      <section className="container proposal-grid">
+        <article className="proposal-card proposal-highlight">
+          <GraduationCap size={24} />
+          <span className="eyebrow">Objetivo da solução</span>
+          <h2>Deixar a jornada mais compreensível antes da chegada à clínica.</h2>
+          <p>O protótipo organiza informações, apresenta alternativas digitais e preserva o telefone e o atendimento presencial.</p>
+        </article>
+        <article className="proposal-card">
+          <span className="eyebrow">5 porquês · síntese</span>
+          <h2>Por que esta proposta existe?</h2>
+          <ol>
+            <li>Porque pacientes têm dúvidas antes de buscar atendimento.</li>
+            <li>Porque informações dispersas dificultam a decisão.</li>
+            <li>Porque a recepção recebe perguntas repetitivas.</li>
+            <li>Porque a jornada ainda pode ser mais orientada.</li>
+            <li>Porque uma interface clara pode apoiar o acolhimento.</li>
+          </ol>
+        </article>
+      </section>
+      <section className="container proposal-section">
+        <SectionHeading eyebrow="Quem participa" title="Stakeholders considerados" description="Uma visão inicial para orientar futuras validações com a instituição." />
+        <div className="stakeholder-grid">
+          {stakeholders.map(([name, text]) => <article key={name}><strong>{name}</strong><p>{text}</p></article>)}
+        </div>
+      </section>
+      <section className="container proposal-limitations">
+        <Info size={20} />
+        <div><strong>Limites atuais e próximos passos</strong><p>Os dados são fictícios, não há backend, autenticação, agenda real ou integração de mensagens. Uma evolução exigiria validação institucional, requisitos de privacidade e arquitetura segura.</p></div>
+        <Button variant="soft" onClick={() => go("/privacidade")}>Ver privacidade <ArrowRight size={15} /></Button>
+      </section>
+    </main>
+  );
+}
+
+function AccessibilityControls({
+  highContrast,
+  setHighContrast,
+  largeText,
+  setLargeText,
+}: {
+  highContrast: boolean;
+  setHighContrast: (value: boolean) => void;
+  largeText: boolean;
+  setLargeText: (value: boolean) => void;
+}) {
+  return <div className="accessibility-controls" aria-label="Controles de acessibilidade">
+    <span><Contrast size={14} /> Acessibilidade</span>
+    <button aria-pressed={highContrast} onClick={() => setHighContrast(!highContrast)}><Contrast size={14} /> Alto contraste</button>
+    <button aria-pressed={largeText} onClick={() => setLargeText(!largeText)}><Type size={14} /> Texto maior</button>
+  </div>;
 }
 
 export default function Home() {
   const [location, setLocation] = useLocation();
   const [booking, setBooking] = useState<Booking>(createDraft);
-  const [appointments, setAppointments] = useState<Appointment[]>([]);
-  const [confirmed, setConfirmed] = useState<Appointment | null>(null);
+  const [appointments, setAppointments] = useState<Appointment[]>(() => {
+    if (typeof window === "undefined") return [];
+    try { return JSON.parse(window.localStorage.getItem("ceuma-demo-appointments") ?? "[]") as Appointment[]; } catch { return []; }
+  });
+  const [confirmed, setConfirmed] = useState<Appointment | null>(() => {
+    if (typeof window === "undefined") return null;
+    try { return JSON.parse(window.localStorage.getItem("ceuma-demo-confirmed") ?? "null") as Appointment | null; } catch { return null; }
+  });
+  const [highContrast, setHighContrast] = useState(() => typeof window !== "undefined" && window.localStorage.getItem("ceuma-high-contrast") === "true");
+  const [largeText, setLargeText] = useState(() => typeof window !== "undefined" && window.localStorage.getItem("ceuma-large-text") === "true");
   const [messageBooking, setMessageBooking] = useState<Booking | null>(null);
   const go = (path: string) => {
     if (
@@ -1006,6 +1143,13 @@ export default function Home() {
     setMessageBooking(appointment);
     go("/sucesso");
   };
+  const editBooking = (appointment: Appointment) => {
+    setBooking({ ...appointment, patient: { ...appointment.patient } });
+    go("/agendamento");
+  };
+  const cancelAppointment = (protocol: string) => {
+    setAppointments((prev) => prev.filter((item) => item.protocol !== protocol));
+  };
   const resetDemo = () => {
     setBooking(createDraft());
     setAppointments([]);
@@ -1013,6 +1157,17 @@ export default function Home() {
     setMessageBooking(null);
     go("/");
   };
+  useEffect(() => {
+    window.localStorage.setItem("ceuma-demo-appointments", JSON.stringify(appointments));
+  }, [appointments]);
+  useEffect(() => {
+    if (confirmed) window.localStorage.setItem("ceuma-demo-confirmed", JSON.stringify(confirmed));
+    else window.localStorage.removeItem("ceuma-demo-confirmed");
+  }, [confirmed]);
+  useEffect(() => {
+    window.localStorage.setItem("ceuma-high-contrast", String(highContrast));
+    window.localStorage.setItem("ceuma-large-text", String(largeText));
+  }, [highContrast, largeText]);
   useEffect(() => {
     const title =
       navItems.find(([, path]) => path === cleanPath)?.[0] ??
@@ -1064,11 +1219,14 @@ export default function Home() {
         go={go}
         newBooking={() => startBooking()}
         showMessage={showMessage}
+        editBooking={editBooking}
+        cancelAppointment={cancelAppointment}
       />
     );
   else if (cleanPath === "/informacoes") content = <InfoPage go={go} />;
   else if (cleanPath === "/servicos") content = <ServicesPage go={go} />;
   else if (cleanPath === "/ajuda") content = <HelpPage go={go} />;
+  else if (cleanPath === "/sobre-proposta") content = <ProposalPage go={go} />;
   else if (cleanPath === "/privacidade")
     content = <PrivacyPage go={go} resetDemo={resetDemo} />;
   else if (cleanPath === "/whatsapp")
@@ -1087,7 +1245,7 @@ export default function Home() {
     );
 
   return (
-    <div className="app-shell is-loaded">
+    <div className={`app-shell is-loaded ${highContrast ? "high-contrast" : ""} ${largeText ? "large-text" : ""}`}>
       <a className="skip-link" href="#main-content">
         Pular para o conteúdo
       </a>
@@ -1101,6 +1259,7 @@ export default function Home() {
           Entenda a demonstração <ArrowRight size={13} />
         </button>
       </div>
+      <AccessibilityControls highContrast={highContrast} setHighContrast={setHighContrast} largeText={largeText} setLargeText={setLargeText} />
       {content}
       <Footer go={go} />
       <button

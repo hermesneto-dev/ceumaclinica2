@@ -19,6 +19,7 @@ const routes = [
   "/informacoes",
   "/servicos",
   "/ajuda",
+  "/sobre-proposta",
   "/whatsapp",
   "/privacidade",
 ];
@@ -78,5 +79,9 @@ describe("páginas do protótipo migrado", () => {
     const html = render("/cadastro");
     expect(html).toContain("Tipo de atendimento de exemplo");
     expect(html).toContain("Não informe sintomas, diagnósticos");
+  });
+  it("apresenta FAQ e conteúdo acadêmico separado", () => {
+    expect(render("/ajuda")).toContain("Dúvidas frequentes");
+    expect(render("/sobre-proposta")).toContain("Apresentação acadêmica");
   });
 });

@@ -1,6 +1,6 @@
 # Entregas do protótipo — Clínica-Escola Integrada Ana Lúcia Chaves Fecury
 
-Este é um projeto novo autorizado, migrado da cópia recuperada. Os critérios funcionais abaixo foram implementados e revisados por inspeção de código e checagens automatizadas. A revisão visual final em navegador fica em aberto; não foi executada nesta etapa.
+Este é um projeto novo autorizado, migrado da cópia recuperada. Os critérios funcionais abaixo foram implementados e revisados por inspeção de código, checagens automatizadas e capturas do Preview em desktop/mobile.
 
 ## 1. Identidade visual da Clínica-Escola Integrada
 - [x] Usar o nome completo “Clínica-Escola Integrada Ana Lúcia Chaves Fecury” nos pontos visíveis da marca, com boa hierarquia no desktop e leitura no mobile.
@@ -38,21 +38,21 @@ Este é um projeto novo autorizado, migrado da cópia recuperada. Os critérios 
 - [x] O produto não deve afirmar integração existente com o sistema interno da clínica nem inventar funcionalidades dele; deve ser apresentado como proposta conceitual futura.
 
 ## 7. Qualidade visual e responsividade
-- [ ] O resultado deve parecer um produto digital real, moderno, simples, acessível e profissional, adequado para apresentação acadêmica.
+- [x] O resultado deve parecer um produto digital real, moderno, simples, acessível e profissional, adequado para apresentação acadêmica.
 - [x] A identidade deve usar tons suaves de verde e azul, espaço em branco, cards, bordas arredondadas e elementos discretos, evitando aparência fria/hostil.
-- [ ] O layout deve funcionar em celular e desktop, com conteúdo vertical e CTAs acessíveis no mobile.
+- [x] O layout deve funcionar em celular e desktop, com conteúdo vertical e CTAs acessíveis no mobile.
 
-As regras responsivas recuperadas foram preservadas, e os novos componentes possuem adaptação mobile por CSS. Os dois itens abertos dependem da avaliação visual final, não realizada nesta etapa; a renderização estática automatizada não equivale a teste de navegador.
+As regras responsivas recuperadas foram preservadas, e os novos componentes foram conferidos em capturas do Preview a 375px. O calendário foi ajustado após a inspeção para abrir no mês da primeira data válida.
 
 ## 8. Projeto estático independente
 - [x] Manter o protótipo como frontend estático React/Vite, sem servidor, autenticação, banco de dados ou integração real com os sistemas da clínica; usar dados fictícios e deixar explícita a natureza conceitual.
-- [x] Disponibilizar `/manus-routes.json` com todas as rotas de página efetivamente existentes, mantendo o manifesto sincronizado com o código.
+- [x] Disponibilizar `/manus-routes.json` com todas as rotas de página efetivamente existentes, mantendo o manifesto sincronizado com o código (incluindo `/sobre-proposta`).
 - [x] Preservar o comportamento das rotas e dos fluxos ao migrar o protótipo para este projeto WebDev novo; manter comandos de execução, checagem TypeScript e build estático funcionais.
 
 ## Evidências e limites da etapa
 
 O logo original foi recuperado do conteúdo do histórico exportado. O código foi separado em páginas, componentes compartilhados, jornada demonstrativa e lógica de agenda/cadastro. As datas são ISO e futuras, nos dias da semana da especialidade; todas as cinco especialidades podem ser escolhidas. A confirmação cria um registro com protocolo demonstrativo na memória, e a prévia de WhatsApp usa o rascunho ou registro explicitamente selecionado. Cadastro e revisão incluem tipo de atendimento de exemplo sem solicitar sintomas ou dados clínicos reais.
 
-TypeScript (inclusive checagem de importações não utilizadas), testes de lógica/renderização estática e build de produção passaram. Página inicial, manifesto JSON de 13 rotas e SVG responderam por HTTP 200 no listener e na entrada interna do Preview. Esses pedidos HTTP verificam a saúde do servidor, não o acesso do navegador do usuário. Sem testes de browser ou captura de tela nesta etapa. A publicação automática está desligada e este projeto não foi publicado.
+TypeScript (inclusive checagem de importações não utilizadas), 38 testes de lógica/renderização estática, build de produção e `git diff --check` passaram. O Preview foi capturado em desktop/mobile para home, especialidades, agendamento, agendamentos, ajuda e apresentação acadêmica. O manifesto agora contém 14 rotas. A publicação automática está desligada e este projeto não foi publicado.
 
-Os dados de demonstração não são persistidos: recarregar a página ou usar “Reiniciar demonstração” remove os exemplos. Telefones, endereço, profissionais, serviços e horários são ilustrativos; não devem ser usados para buscar atendimento real.
+Os dados de demonstração agora permanecem somente no `localStorage` deste navegador para facilitar apresentações; não são enviados à clínica. Foram incluídos calendário mensal, edição/cancelamento locais, busca por termos relacionados, FAQ, controles de alto contraste/texto maior e área acadêmica. Telefones, endereço, profissionais, serviços e horários continuam ilustrativos; não devem ser usados para buscar atendimento real.
