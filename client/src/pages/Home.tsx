@@ -265,15 +265,6 @@ function HomePage({ go }: { go: (path: string) => void }) {
                   </span>
                 </div>
               </div>
-              <div className="floating-note">
-                <div className="note-icon">
-                  <MessageCircle size={16} />
-                </div>
-                <div>
-                  <strong>Proposta de lembrete</strong>
-                  <span>Lembrete disponível no MVP.</span>
-                </div>
-              </div>
             </div>
           </div>
         </section>
